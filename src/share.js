@@ -35,4 +35,18 @@
     return $(elem).text().indexOf('awesome') !== -1;
   };
 
+    $.fn.share = function(options) {
+        var option = $.extend({content: '', left: 0, right: 0, top: 0, bottom: 0}, options);
+        this.addClass('share-origin');
+        (option.content).addClass('share-container');
+        (option.content).appendTo(this);
+        this.mouseover(function() {
+            $(this).find('.share-group').css({display: 'block', left: option.left, right: option.right, top: option.top, bottom: option.bottom});
+        });
+        this.mouseleave(function () {
+            $(this).find('.share-group').css('display', 'none');
+        });
+        return this;
+    };
+
 }(jQuery));
