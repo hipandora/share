@@ -1,21 +1,6 @@
-.share-item,
-.share-items {
-  position: relative;
-  width: 100px;
-  height: 100px;
-  margin-left: 100px;
-  border: 1px solid red;
-}
-
-.share-item:hover .share-group,
-.share-items:hover .share-items-group {
-  display: block;
-}
-
 .share-group,
 .share-items-group {
   width: 38px;
-  height: auto;
   background: #fafafa;
   border-radius: 4px;
   border: 1px solid #e6e6e6;
@@ -23,6 +8,14 @@
   position: absolute;
   top: -1px;
   right: -41px;
+}
+
+.share-group {
+    height: 134px;
+}
+
+.share-items-group {
+    height: 170px;
 }
 
 .share-items-group {
