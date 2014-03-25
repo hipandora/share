@@ -36,16 +36,39 @@
   };
 
     $.fn.share = function(options) {
+        var _w = 32 , _h = 32;
+        var param = {
+            url:location.href,
+            type:'1',
+            count:'',
+            appkey:'1153655536',
+            title:'',
+            pic:'',
+            ralateUid:'',
+            language:'zh_cn',
+            rnd:new Date().valueOf()
+        }
+        var temp = [];
+        for( var p in param ){
+            temp.push(p + '=' + encodeURIComponent( param[p] || '' ) )
+        }
         var option = $.extend({share_with_status: true, left: 0, right: 0, top: 0, bottom: 0}, options);
         this.addClass('share-origin');
         var only_share_content = '<div class="share-group share-container">'+
-                                 '<div class="group-item-sina"></div>'+
+                                 '<div class="group-item-sina">'+
+                                 '<div style="position:absolute;top:0px;left:2px;opacity:0;filter:alpha(opacity=0);">'+
+                                 '<iframe allowTransparency="true" frameborder="0" scrolling="no" src="http://hits.sinajs.cn/A1/weiboshare.html?' + temp.join('&') + '" width="'+ _w+'" height="'+_h+'"></iframe>'+
+                                 '</div>'+
+                                 '</div>'+
                                  '<div class="group-item-weixin"></div>'+
                                  '<div class="group-item-email"></div>'+
                                  '<div class="group-item-link group-last-item"></div>'+
                                  '</div>';
         var share_with_status = '<div class="share-items-group share-container">'+
                                 '<div class="group-item-sina group-item-has-num">'+
+                                '<div style="position:absolute;top:0px;left:2px;opacity:0;filter:alpha(opacity=0);">'+
+                                '<iframe allowTransparency="true" frameborder="0" scrolling="no" src="http://hits.sinajs.cn/A1/weiboshare.html?' + temp.join('&') + '" width="'+ _w+'" height="'+_h+'"></iframe>'+
+                                '</div>'+
                                 '<span class="group-item-num sina-share-count">0</span>'+
                                 '</div>'+
                                 '<div class="group-item-weixin group-item-has-num">'+
