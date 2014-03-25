@@ -3,7 +3,97 @@
     left: 0;
     top: 0;
 }
-
 .share-origin {
     position: relative;
 }
+.share-group,
+.share-items-group {
+    width: 38px;
+    background: #fafafa;
+    border-radius: 4px;
+    border: 1px solid #e6e6e6;
+    display: none;
+    position: absolute;
+    top: -1px;
+    right: -41px;
+}
+
+.share-group {
+    height: 134px;
+}
+
+.share-items-group {
+    height: 176px;
+}
+
+.share-items-group {
+    left: -40px;
+}
+
+.group-item-has-num {
+    font-size: 12px;
+    margin-bottom: 28px;
+}
+
+.group-item-num {
+    display: none;
+    padding-top: 31px;
+    padding-left: 4px;
+}
+
+.group-item-has-num .group-item-num {
+    display: block;
+}
+
+.group-item-line {
+    width: 30px;
+    height: 1px;
+    margin: 7px auto 10px;
+    border-bottom: 1px solid #d2d2d2;
+}
+
+.group-last-item {
+    margin-bottom: 7px;
+}
+
+.group-item-sina,
+.group-item-weixin,
+.group-item-email,
+.group-item-email-gray,
+.group-item-link,
+.group-item-like {
+    width: 24px;
+    height: 24px;
+    margin-top: 7px;
+    margin-left: 7px;
+    cursor: pointer;
+}
+
+.group-item-like {
+    margin-left: 9px;
+}
+
+.group-item-sina {
+    background: url(../img/icon-sina-24x24.png) no-repeat 0 0;
+}
+
+.group-item-weixin {
+    background: url(../img/icon-weixin-24x24.png) no-repeat 0 0;
+}
+
+.group-item-email {
+    background: url(../img/icon-email-24x24.png) no-repeat 0 0;
+}
+
+.group-item-link {
+    background: url(../img/icon-link-24x24.png) no-repeat 0 0;
+}
+
+.group-item-email-gray {
+    background: url(../img/icon-email-gray-24x19.png) no-repeat 0 0;
+}
+
+.group-item-like {
+    background: url(../img/icon-like-20x16.png) no-repeat 0 0;
+}
+

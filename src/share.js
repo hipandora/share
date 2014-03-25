@@ -36,11 +36,31 @@
   };
 
     $.fn.share = function(options) {
-        var option = $.extend({content: '', left: 0, right: 0, top: 0, bottom: 0}, options);
-        console.log('left:', option.left);
+        var option = $.extend({share_with_status: true, left: 0, right: 0, top: 0, bottom: 0}, options);
         this.addClass('share-origin');
-        (option.content).addClass('share-container');
-        (option.content).appendTo(this);
+        var only_share_content = '<div class="share-group share-container">'+
+                                 '<div class="group-item-sina"></div>'+
+                                 '<div class="group-item-weixin"></div>'+
+                                 '<div class="group-item-email"></div>'+
+                                 '<div class="group-item-link group-last-item"></div>'+
+                                 '</div>';
+        var share_with_status = '<div class="share-items-group share-container">'+
+                                '<div class="group-item-sina group-item-has-num">'+
+                                '<span class="group-item-num sina-share-count">0</span>'+
+                                '</div>'+
+                                '<div class="group-item-weixin group-item-has-num">'+
+                                '<span class="group-item-num weixin-share-count">0</span>'+
+                                '</div>'+
+                                '<div class="group-item-email-gray"></div>'+
+                                '<div class="group-item-line"></div>'+
+                                '<div class="group-item-like"></div>'+
+                                '</div>';
+        if (option.share_with_status) {
+            $(share_with_status).appendTo(this);
+        } else {
+            $(only_share_content).appendTo(this);
+
+        }
         this.mouseover(function() {
             $(this).find('.share-container').css({display: 'block', left: option.left, right: option.right, top: option.top, bottom: option.bottom});
         });
