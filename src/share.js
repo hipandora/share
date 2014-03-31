@@ -51,11 +51,15 @@
 
         var partial_title = '#' + $('.share-note-type').text().trim() + '#：' + $(".share-title").text().trim() + '［' + $('.share-note-day-count').text().trim() + '天/' + $('.img-box').length + '图］，'
 
+        var pic_anchor = location.href;
+        if (this.children('img').attr('id') != undefined) {
+            pic_anchor = location.href.split('#')[0] + '#' + this.children('img').attr('id');
+        }
 
         if ($($('.current-user-id')[0]).text().trim() == $('.note-author').text().trim()) {
-            title += '我在@hi潘多拉网 创建了一篇' + partial_title + '大家赶紧来围观传阅吧～查看戳这里:';
+            title += '我在@hi潘多拉网 创建了一篇' + partial_title + '大家赶紧来围观传阅吧～查看戳这里:' + pic_anchor;
         } else {
-            title += '我发现了一篇很实用的' + partial_title + '并分享给大家！（分享自@hi潘多拉网 ）';
+            title += '我发现了一篇很实用的' + partial_title + '并分享给大家！' + pic_anchor + '（分享自@hi潘多拉网 ）';
         }
         var param = {
             url: location.href,
