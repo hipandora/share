@@ -102,10 +102,10 @@
             '<div style="position:absolute;top:2px;left:4px;opacity:0;filter:alpha(opacity=0);">' +
             '<iframe allowTransparency="true" frameborder="0" scrolling="no" src="http://hits.sinajs.cn/A1/weiboshare.html?' + temp.join('&') + '" width="' + _w + '" height="' + _h + '"></iframe>' +
             '</div>' +
-            '<span class="group-item-num sina-share-count">0</span>' +
+            '<span class="group-item-num sina-share-count" style="position: relative; left:-2px;text-align:center;color: #828282">0</span>' +
             '</div>' +
             '<div class="group-item-weixin group-item-has-num">' +
-            '<span class="group-item-num weixin-share-count">0</span>' +
+            '<span class="group-item-num weixin-share-count" style="position: relative; left:-2px;text-align:center;color: #828282">0</span>' +
             '</div>' +
             '<div class="group-item-email-gray"></div>' +
             '<div class="group-item-line"></div>' +
@@ -170,6 +170,7 @@
                         dataType: "jsonp",
                         success: function (share_count_result, textStatus, xhr) {
                             var pic_share_count = share_count_result['data']['urls'][0]['share_counts'];
+                            console.log(pic_share_count)
                             console.log('---');
                             $('.share-total-count').text(parseInt(pic_share_count) + parseInt($.cookie('article_share_count')));
                         },
