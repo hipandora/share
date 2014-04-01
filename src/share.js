@@ -99,7 +99,7 @@
             '</div>';
         var share_with_status = '<div class="share-items-group share-container share-article-container">' +
             '<div class="group-item-sina group-item-has-num">' +
-            '<div style="position:absolute;top:2px;left:4px;opacity:0;filter:alpha(opacity=0);">' +
+            '<div style="position:absolute;top:2px;left:4px;opacity:0;filter:alpha(opacity=0);z-index: 9999">' +
             '<iframe allowTransparency="true" frameborder="0" scrolling="no" src="http://hits.sinajs.cn/A1/weiboshare.html?' + temp.join('&') + '" width="' + _w + '" height="' + _h + '"></iframe>' +
             '</div>' +
             '<span class="group-item-num sina-share-count" style="position: relative; left:-2px;text-align:center;color: #828282">0</span>' +
