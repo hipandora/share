@@ -35,6 +35,11 @@
         return $(elem).text().indexOf('awesome') !== -1;
     };
 
+
+    $.share_url = function(){
+        return location.origin + '/index/viewNote?id=' + location.href.split('#')[0].split('=')[1];
+    }
+
     $.fn.share = function (options) {
         var _w = 32 , _h = 32, pic = '', origin = window.location.origin;
 
@@ -48,24 +53,25 @@
         }
 
         var title = '';
+        var pre_url =  $.share_url();
 
         var partial_title = '#' + $('.share-note-type').text().trim() + '#：' + $(".share-title").text().trim() + '［' + $('.share-note-day-count').text().trim() + '天/' + $('.img-box').length + '图］，'
 
-        var pic_anchor = location.href;
+        var pic_anchor = pre_url;
 
         var is_share_article = true ;
         if (this.children('img').attr('id') != undefined) {
-            pic_anchor = location.href.split('#')[0] + '#' + this.children('img').attr('id');
+            pic_anchor = pre_url + '#' + this.children('img').attr('id');
             is_share_article = false ;
         }
 
         if ($($('.current-user-id')[0]).text().trim() == $('.note-author').text().trim()) {
-            title += '我在@hi潘多拉网 创建了一篇' + partial_title + '大家赶紧来围观传阅吧～查看戳这里:' + pic_anchor;
+            title += '我在@hi潘多拉网 创建了一篇' + partial_title + '从计划到出行，给你最真实的经历与经验分享，大家赶紧来围观传阅吧～查看戳这里:[ ' + pic_anchor + ' ]';
         } else {
             title += '我发现了一篇很实用的' + partial_title + '并分享给大家！' + pic_anchor + '（分享自@hi潘多拉网 ）';
         }
         var param = {
-            url: location.href.split('#')[0] + (is_share_article ? '' : '#the_user_item'),
+            url: pre_url + (is_share_article ? '' : '#the_user_item'),
             type: '1',
             count: '',
             appkey: '1153655536',
@@ -109,20 +115,25 @@
             $(share_with_status).appendTo(this).css('position', 'fixed').css('top', $(window).height() / 3).css('left', $('.white-bg').offset().left - 40).show();
         } else {
             $(only_share_content).appendTo(this);
+            $($(this.parent().get(0)).parent().get(0)).mouseenter(function () {
+                console.log(this)
+                $(this).find('.share-pic-container').css({display: 'block', left: option.left, right: option.right, top: option.top, bottom: option.bottom});
+
+            });
+
+            $($(this.parent().get(0)).parent().get(0)).mouseleave(function () {
+                $(this).find('.share-pic-container').css('display', 'none');
+            });
         }
 
-        $(this.parent('.content-sub-box.preview-content-sub-box')).mouseenter(function () {
-            $(this).find('.share-pic-container').css({display: 'block', left: option.left, right: option.right, top: option.top, bottom: option.bottom});
-        });
-        $(this.parent('.content-sub-box.preview-content-sub-box')).mouseleave(function () {
-            $(this).find('.share-pic-container').css('display', 'none');
-        });
+
+
         return this;
     };
     $.render_share_count = function(){
         function render_sina_share_counts() {
             $.ajax({
-                url: 'https://api.weibo.com/2/short_url/shorten.json?url_long=' + encodeURIComponent(location.href.split('#')[0]) + '&access_token=2.00JT793DVzTAUE1549e8542b3w2R8E',
+                url: 'https://api.weibo.com/2/short_url/shorten.json?url_long=' + encodeURIComponent($.share_url()) + '&access_token=2.00JT793DVzTAUE1549e8542b3w2R8E',
                 type: "GET",
                 dataType: "jsonp",
                 success: function (short_url_result, textStatus, xhr) {
@@ -149,7 +160,7 @@
 
         function render_total_share_counts(){
             $.ajax({
-                url: 'https://api.weibo.com/2/short_url/shorten.json?url_long=' + encodeURIComponent(location.href.split('#')[0] + '#the_user_item') + '&access_token=2.00JT793DVzTAUE1549e8542b3w2R8E',
+                url: 'https://api.weibo.com/2/short_url/shorten.json?url_long=' + encodeURIComponent($.share_url() + '#the_user_item') + '&access_token=2.00JT793DVzTAUE1549e8542b3w2R8E',
                 type: "GET",
                 dataType: "jsonp",
                 success: function (short_url_result, textStatus, xhr) {
@@ -159,6 +170,7 @@
                         dataType: "jsonp",
                         success: function (share_count_result, textStatus, xhr) {
                             var pic_share_count = share_count_result['data']['urls'][0]['share_counts'];
+                            console.log('---');
                             $('.share-total-count').text(parseInt(pic_share_count) + parseInt($.cookie('article_share_count')));
                         },
                         error: function (error) {
