@@ -132,7 +132,7 @@
         return this;
     };
     $.render_share_count = function(){
-        function render_sina_share_counts() {
+        function render_sina_share_counts(cb) {
             $.ajax({
                 url: 'https://api.weibo.com/2/short_url/shorten.json?url_long=' + encodeURIComponent($.share_url()) + '&access_token=2.00JT793DVzTAUE1549e8542b3w2R8E',
                 type: "GET",
@@ -150,21 +150,23 @@
                             console.log(share_count_result)
                             var article_share_count = share_count_result['data']['urls'][0]['share_counts'];
                             $('.sina-share-count').text(article_share_count);
-                            $.cookie('article_share_count', article_share_count,{ path: "/"});
+                            cb(article_share_count);
                         },
                         error: function (error) {
                             console.log('获取分享数错误');
+                            cb(0);
                         }
 
                     });
                 },
                 error: function (error) {
                     console.log('获取短网址错误');
+                    cb(0);
                 }
             })
         }
 
-        function render_total_share_counts(){
+        function render_total_share_counts(article_share_count){
             $.ajax({
                 url: 'https://api.weibo.com/2/short_url/shorten.json?url_long=' + encodeURIComponent($.share_url() + '#the_user_item') + '&access_token=2.00JT793DVzTAUE1549e8542b3w2R8E',
                 type: "GET",
@@ -183,7 +185,7 @@
                             var pic_share_count = share_count_result['data']['urls'][0]['share_counts'];
                             console.log(pic_share_count)
                             console.log('---');
-                            $('.share-total-count').text(parseInt(pic_share_count) + parseInt($.cookie('article_share_count')));
+                            $('.share-total-count').text(parseInt(pic_share_count) + parseInt(article_share_count));
                         },
                         error: function (error) {
                             console.log('获取分享数错误');
@@ -197,8 +199,9 @@
             });
         }
 
-        render_sina_share_counts();
-        render_total_share_counts();
+        render_sina_share_counts(function(num) {
+          render_total_share_counts(num);
+        });
 
     }
 
