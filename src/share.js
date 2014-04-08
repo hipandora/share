@@ -105,10 +105,10 @@
             '</div>' +
             '<span class="group-item-num sina-share-count" style="position: relative; left:-2px;top:-6px;text-align:center;color: #828282">0</span>' +
             '</div>' +
-            '<div class="group-item-weixin group-item-has-num" style="margin-top: -8px;">' +
+            '<div class="group-item-weixin group-item-has-num" style="">' +
             '<span class="group-item-num weixin-share-count" style="position: relative; left:-2px;top:-6px;text-align:center;color: #828282">0</span>' +
             '</div>' +
-            '<div class="group-item-email-gray" style="margin-top:-8px;"></div>' +
+            '<div class="group-item-email-gray" style=""></div>' +
             '<div class="group-item-line"></div>' +
             '<div class="group-item-like"></div>' +
             '</div>';
