@@ -82,6 +82,15 @@
             language: 'zh_cn',
             rnd: new Date().valueOf()
         }
+        var init_like = function($like_div) {
+            $like_div.data('liked', option.liked || 0);
+            if( $like_div.data('liked') ) {
+                $like_div.addClass('group-item-liked');
+            } else {
+                $like_div.removeClass('group-item-liked');
+            }
+            $like_div.on('click', option.like || jQuery.noop);
+        }
         var temp = [];
         for (var p in param) {
             temp.push(p + '=' + encodeURIComponent(param[p] || ''))
@@ -114,6 +123,8 @@
             '</div>';
         if (option.share_with_status) {
             $(share_with_status).appendTo(this).css('position', 'fixed').css('top', $(window).height() / 3).css('left', $('.white-bg').offset().left - 40).show();
+            // init like
+            init_like( $(this).find('.group-item-like') );
         } else {
             $(only_share_content).appendTo(this);
             $($(this.parent().get(0)).parent().get(0)).mouseenter(function () {
@@ -204,6 +215,5 @@
         });
 
     }
-
 
 }(jQuery));

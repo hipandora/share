@@ -97,3 +97,7 @@
     background: url(../img/icon-like-20x16.png) no-repeat 0 0;
 }
 
+.group-item-liked {
+    background: url(../img/icon-liked-20x16.jpg) no-repeat 0 0;
+}
+
