@@ -128,7 +128,6 @@
         } else {
             $(only_share_content).appendTo(this);
             $($(this.parent().get(0)).parent().get(0)).mouseenter(function () {
-                console.log(this)
                 $(this).find('.share-pic-container').css({display: 'block', left: option.left, right: option.right, top: option.top, bottom: option.bottom});
 
             });
@@ -149,16 +148,11 @@
                 type: "GET",
                 dataType: "jsonp",
                 success: function (short_url_result, textStatus, xhr) {
-                    console.log('------share article count-------');
-                    console.log('https://api.weibo.com/2/short_url/shorten.json?url_long=' + encodeURIComponent($.share_url()) + '&access_token=2.00JT793DVzTAUE1549e8542b3w2R8E');
-                    console.log(short_url_result);
                     $.ajax({
                         url: 'https://api.weibo.com/2/short_url/share/counts.json?url_short=' + short_url_result['data']['urls'][0]['url_short'] + '&access_token=2.00JT793DVzTAUE1549e8542b3w2R8E',
                         type: "GET",
                         dataType: "jsonp",
                         success: function (share_count_result, textStatus, xhr) {
-                            console.log('https://api.weibo.com/2/short_url/share/counts.json?url_short=' + short_url_result['data']['urls'][0]['url_short'] + '&access_token=2.00JT793DVzTAUE1549e8542b3w2R8E');
-                            console.log(share_count_result)
                             var article_share_count = share_count_result['data']['urls'][0]['share_counts'];
                             $('.sina-share-count').text(article_share_count);
                             cb(article_share_count);
@@ -183,19 +177,12 @@
                 type: "GET",
                 dataType: "jsonp",
                 success: function (short_url_result, textStatus, xhr) {
-                    console.log('------share total count-------');
-                    console.log('https://api.weibo.com/2/short_url/shorten.json?url_long=' + encodeURIComponent($.share_url() + '#the_user_item') + '&access_token=2.00JT793DVzTAUE1549e8542b3w2R8E');
-                    console.log(short_url_result);
                     $.ajax({
                         url: 'https://api.weibo.com/2/short_url/share/counts.json?url_short=' + short_url_result['data']['urls'][0]['url_short'] + '&access_token=2.00JT793DVzTAUE1549e8542b3w2R8E',
                         type: "GET",
                         dataType: "jsonp",
                         success: function (share_count_result, textStatus, xhr) {
-                            console.log('https://api.weibo.com/2/short_url/share/counts.json?url_short=' + short_url_result['data']['urls'][0]['url_short'] + '&access_token=2.00JT793DVzTAUE1549e8542b3w2R8E');
-                            console.log(share_count_result);
                             var pic_share_count = share_count_result['data']['urls'][0]['share_counts'];
-                            console.log(pic_share_count)
-                            console.log('---');
                             $('.share-total-count').text(parseInt(pic_share_count) + parseInt(article_share_count));
                         },
                         error: function (error) {
