@@ -104,7 +104,7 @@
             '</div>' +
             '</div>' +
             '<div class="group-item-weixin"></div>' +
-            '<div class="group-item-email"></div>' +
+            '<div class="group-item-email share-email-right"></div>' +
             '<div class="group-item-link group-last-item"></div>' +
             '</div>';
         var share_with_status = '<div class="share-items-group share-container share-article-container">' +
@@ -117,7 +117,7 @@
             '<div class="group-item-weixin group-item-has-num" style="">' +
             '<span class="group-item-num weixin-share-count" style="position: relative; left:-2px;top:-6px;text-align:center;color: #828282">0</span>' +
             '</div>' +
-            '<div class="group-item-email-gray" style=""></div>' +
+            '<div class="group-item-email-gray share-email-left"></div>' +
             '<div class="group-item-line"></div>' +
             '<div class="group-item-like"></div>' +
             '</div>';
@@ -200,7 +200,7 @@
         render_sina_share_counts(function(num) {
           render_total_share_counts(num);
         });
-
+        $.share_email();
     }
 
     $.share_email = function () {
