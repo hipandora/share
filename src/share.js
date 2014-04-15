@@ -372,7 +372,7 @@
         function pop_continue_receive_subscribe_success_block(side, opt) {
             if (side == 'right') {
                 $(opt).parent().append(continue_receive_subscribe_success);
-                $('.email-first-share-wrapper').css('top', '-78px').css('left', '').css('right', '168px');
+                $('.email-first-share-wrapper').css('top', '-78px').css('left', '').css('right', '362px');
                 $('.email-btn-group a').css('display', 'block');
             } else {
                 $('.share-article-container').append(continue_receive_subscribe_success);
