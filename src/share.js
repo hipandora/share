@@ -158,14 +158,14 @@
                             cb(article_share_count);
                         },
                         error: function (error) {
-                            console.log('获取分享数错误');
+                            console.error('获取分享数错误');
                             cb(0);
                         }
 
                     });
                 },
                 error: function (error) {
-                    console.log('获取短网址错误');
+                    console.error('获取短网址错误');
                     cb(0);
                 }
             })
@@ -186,13 +186,13 @@
                             $('.share-total-count').text(parseInt(pic_share_count) + parseInt(article_share_count));
                         },
                         error: function (error) {
-                            console.log('获取分享数错误');
+                            console.error('获取分享数错误');
                         }
 
                     });
                 },
                 error: function (error) {
-                    console.log('获取短网址错误');
+                    console.error('获取短网址错误');
                 }
             });
         }
@@ -201,6 +201,219 @@
           render_total_share_counts(num);
         });
 
+    }
+
+    $.share_email = function () {
+
+        // first step
+        var share_email_pop_wrapper =
+            '<div class="email-share-wrapper" style="position: relative;left: 38px;top: -190px;background-color: #fff">' +
+            '<b></b>' +
+            '<a class="email-share-close " href="javascript:{}" >×</a>' +
+            '<div class="email-share-header">给你的朋友发送邮件</div>' +
+            '<div class="email-input-box">' +
+            '<input type="text" class="email-address-self email-validate" placeholder="你的邮箱"/>' +
+            '<input type="text" class="email-address-friend email-validate" placeholder="朋友的邮箱（多个邮箱用逗号间隔）"/>' +
+            '<textarea type="text" class="email-share-info">嘿，我发现了Hi潘多拉这篇有趣的手记，并发送给你。</textarea>' +
+            '</div>' +
+            '<div class="email-btn-group">' +
+            '<a class="btn-gray-90x30">发送</a>' +
+            '</div>' +
+            '</div>';
+
+        function pop_share_email_block(side, opt) {
+            if ($('.email-share-' + side + '-arrow').length == 1) {
+                $('.email-share-' + side + '-arrow').parent().remove();
+                return;
+            }
+
+            if (side == 'right') {
+                $(opt).parent().append(share_email_pop_wrapper);
+                $('.email-share-wrapper').css('top', '-184px').css('left', '').css('right', '362px');
+                $('.email-btn-group a').css('display', 'block');
+                $('.email-share-header').css('margin-left', '-194px');
+            } else {
+                $('.share-article-container').append(share_email_pop_wrapper);
+            }
+
+            $('.email-share-wrapper b:first-child').addClass('email-share-' + side + '-arrow');
+
+            $('.email-validate').each(function (index, item) {
+                $(item).keyup(listen_input_for_validate_email);
+            });
+
+            $(window).keyup(function () {
+                if ($('.email-validate:first').css('border-color') == 'rgb(0, 141, 223)' && $('.email-validate:first').val().trim().length != 0 &&
+                    $('.email-validate:last').css('border-color') == 'rgb(0, 141, 223)' && $('.email-validate:last').val().trim().length != 0 &&
+                    $('.email-share-info').val().trim().length != 0) {
+                    $('.email-btn-group a').removeClass('btn-gray-90x30');
+                    $('.email-btn-group a').addClass('btn-blue-90x30');
+                } else {
+                    $('.email-btn-group a').removeClass('btn-blue-90x30');
+                    $('.email-btn-group a').addClass('btn-gray-90x30');
+                }
+            })
+
+            $(":text").focus(function () {
+                $(this).css('border-color', '##008def');
+            });
+
+            $('.email-btn-group a').click(function () {
+                if ($(this).hasClass('btn-gray-90x30')) {
+                    return;
+                }
+                //send email now
+                pop_subscribe_after_share_over_email_block($.trim($('.email-address-self').val()), side, opt);
+                $($(this).parent().parent().remove());
+
+            });
+
+            $('.email-share-close').click(function () {
+                $(this).parent().remove();
+            });
+
+        }
+
+        //second step
+        var subscribe_after_share_over_email = ' <div class="email-share-wrapper" style="position: relative;left: 38px;top: -190px;background-color: #fff">' +
+            '<b></b>' +
+            '<a class="email-share-close">×</a>' +
+            '<div class="email-share-succeed-header">邮件发送成功！</div>' +
+            '<div class="email-recommend-tips">' +
+            '<span id="continue_receive_subscribe_content">让我们在xxxxxx@xx.com为你推送</span>' +
+            '<span>更多内容</span>' +
+            '</div>' +
+            '<div class="email-checkbox-box">' +
+            '<div class="email-source">' +
+            '<div class="email-checkbox">' +
+            '<input type="checkbox" class="receive-all-website-subscribe-content" subscribe_type = "website"/>' +
+            '<span class="email-checkbox-text">hi潘多拉</span>' +
+            '</div>' +
+            '<div class="email-num">每周7篇</div>' +
+            '</div>' +
+            '<div class="email-source">' +
+            '<div class="email-checkbox">' +
+            '<input type="checkbox" class="receive-some-channel-subscribe-content some-channel-checkbox" subscribe_type = "旅行手记" />' +
+            '<span class="email-checkbox-text some-channel">旅行手记</span>' +
+            '</div>' +
+            '<div class="email-num">每周2篇</div>' +
+            '</div>' +
+            '</div>' +
+            '<div class="email-succeed-btn-group">' +
+            '<a class="email-deny">不用了</a>' +
+            '<a class="btn-gray-90x30 continue-receive-subscribe">好的</a>' +
+            '</div>';
+
+
+        function pop_subscribe_after_share_over_email_block(email, side, opt) {
+            if (side == 'right') {
+                $(opt).parent().append(subscribe_after_share_over_email);
+                $('.email-share-wrapper').css('top', '-184px').css('left', '').css('right', '362px');
+                $('.email-btn-group a').css('display', 'block');
+                $('.email-share-header').css('margin-left', '-194px');
+            } else {
+                $('.share-article-container').append(subscribe_after_share_over_email);
+            }
+
+            $('.email-share-wrapper b:first-child').addClass('email-share-' + side + '-arrow');
+            $("#continue_receive_subscribe_content").text('让我们在' + email + '为你推送');
+            $(".some-channel").text($('.user-tab-item-sel span').text());
+            $(".some-channel-checkbox").attr('subscribe_type', $('.user-tab-item-sel span').text());
+
+            $('.email-share-close').click(function () {
+                $(this).parent().remove();
+            });
+            $('.email-deny').click(function () {
+                $(this).parent().parent().remove();
+            });
+
+            $(window).click(function () {
+                if ($('.receive-all-website-subscribe-content').prop('checked') || $('.receive-some-channel-subscribe-content').prop('checked')) {
+                    $('.continue-receive-subscribe').removeClass('btn-gray-90x30').addClass('btn-blue-90x30');
+                } else {
+                    $('.continue-receive-subscribe').removeClass('btn-blue-90x30').addClass('btn-gray-90x30');
+                }
+            });
+
+            $('.continue-receive-subscribe').click(function () {
+                if ($(this).hasClass('btn-gray-90x30')) {
+                    return;
+                }
+                var data = {}, me = this, upload_status = true;
+                data['email'] = email;
+                $('.email-checkbox-box :checked').each(function (index, item) {
+                    data['type'] = $(item).attr('subscribe_type');
+                    $.post('/subscribe', data).done(function () {
+                        upload_status = upload_status && true;
+                    }).fail(function (data) {
+                            upload_status = upload_status && false;
+                            console.error(data['responseJSON']['error']['code']);
+                        });
+
+                }).promise().done(function () {
+                        if (upload_status) {
+                            $(me).parent().parent().remove();
+                            pop_continue_receive_subscribe_success_block(side, opt);
+                        } else {
+                            alert('上传信息失败，请重试');
+                        }
+                    });
+
+            });
+        }
+
+        //step three
+        var continue_receive_subscribe_success =
+            '<div class="email-first-share-wrapper" style="position: relative;left: 38px;top: -86px;background-color: #fff">' +
+            '<b></b>' +
+            '<a class="email-share-close">×</a>' +
+            '<div class="email-share-succeed-header">太棒了！很快你会收到你的第一封邮件。</div>'
+            '</div>';
+
+        function pop_continue_receive_subscribe_success_block(side, opt) {
+            if (side == 'right') {
+                $(opt).parent().append(continue_receive_subscribe_success);
+                $('.email-first-share-wrapper').css('top', '-78px').css('left', '').css('right', '168px');
+                $('.email-btn-group a').css('display', 'block');
+                $('.email-first-share-wrapper').css('margin-left', '-194px');
+
+            } else {
+                $('.share-article-container').append(continue_receive_subscribe_success);
+            }
+            $('.email-first-share-wrapper b:first-child').addClass('email-share-' + side + '-arrow');
+
+            $('.email-share-close').click(function () {
+                $(this).parent().remove();
+            });
+
+        }
+
+        function listen_input_for_validate_email() {
+            var email_reg = /^\w+((-\w+)|(\.\w+))*\@[A-Za-z0-9]+((\.|-)[A-Za-z0-9]+)*\.[A-Za-z]+$/;
+            var me = this;
+            $.each($(this).val().trim().split(','), function (index, item) {
+                if (item.length === 0) {
+                    return true;
+                }
+                if (email_reg.test(item)) {
+                    $(me).css('border-color', '#008DDF')
+                } else {
+                    $(me).css('border-color', '#ff0000')
+                }
+            });
+        }
+
+
+        $(document).ready(function () {
+
+            $('.share-email-left').click(function () {
+                pop_share_email_block('left');
+            });
+
+            $('.share-email-right').click(function () {
+                pop_share_email_block('right', this);
+            });
+        });
     }
 
 }(jQuery));
