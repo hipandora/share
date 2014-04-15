@@ -217,7 +217,7 @@
             '<textarea type="text" class="email-share-info">嘿，我发现了Hi潘多拉这篇有趣的手记，并发送给你。</textarea>' +
             '</div>' +
             '<div class="email-btn-group">' +
-            '<a class="btn-gray-90x30">发送</a>' +
+            '<a class="btn-white-large">发送</a>' +
             '</div>' +
             '</div>';
 
@@ -231,7 +231,6 @@
                 $(opt).parent().append(share_email_pop_wrapper);
                 $('.email-share-wrapper').css('top', '-184px').css('left', '').css('right', '362px');
                 $('.email-btn-group a').css('display', 'block');
-                $('.email-share-header').css('margin-left', '-194px');
             } else {
                 $('.share-article-container').append(share_email_pop_wrapper);
             }
@@ -246,11 +245,11 @@
                 if ($('.email-validate:first').css('border-color') == 'rgb(0, 141, 223)' && $('.email-validate:first').val().trim().length != 0 &&
                     $('.email-validate:last').css('border-color') == 'rgb(0, 141, 223)' && $('.email-validate:last').val().trim().length != 0 &&
                     $('.email-share-info').val().trim().length != 0) {
-                    $('.email-btn-group a').removeClass('btn-gray-90x30');
-                    $('.email-btn-group a').addClass('btn-blue-90x30');
+                    $('.email-btn-group a').removeClass('btn-white-large');
+                    $('.email-btn-group a').addClass('btn-blue-large');
                 } else {
-                    $('.email-btn-group a').removeClass('btn-blue-90x30');
-                    $('.email-btn-group a').addClass('btn-gray-90x30');
+                    $('.email-btn-group a').removeClass('btn-white-large');
+                    $('.email-btn-group a').addClass('btn-white-large');
                 }
             })
 
@@ -259,7 +258,7 @@
             });
 
             $('.email-btn-group a').click(function () {
-                if ($(this).hasClass('btn-gray-90x30')) {
+                if ($(this).hasClass('btn-white-large')) {
                     return;
                 }
                 //send email now
@@ -301,7 +300,7 @@
             '</div>' +
             '<div class="email-succeed-btn-group">' +
             '<a class="email-deny">不用了</a>' +
-            '<a class="btn-gray-90x30 continue-receive-subscribe">好的</a>' +
+            '<a class="btn-white-large continue-receive-subscribe">好的</a>' +
             '</div>';
 
 
@@ -329,14 +328,14 @@
 
             $(window).click(function () {
                 if ($('.receive-all-website-subscribe-content').prop('checked') || $('.receive-some-channel-subscribe-content').prop('checked')) {
-                    $('.continue-receive-subscribe').removeClass('btn-gray-90x30').addClass('btn-blue-90x30');
+                    $('.continue-receive-subscribe').removeClass('btn-white-large').addClass('btn-blue-large');
                 } else {
-                    $('.continue-receive-subscribe').removeClass('btn-blue-90x30').addClass('btn-gray-90x30');
+                    $('.continue-receive-subscribe').removeClass('btn-blue-large').addClass('btn-white-large');
                 }
             });
 
             $('.continue-receive-subscribe').click(function () {
-                if ($(this).hasClass('btn-gray-90x30')) {
+                if ($(this).hasClass('btn-white-large')) {
                     return;
                 }
                 var data = {}, me = this, upload_status = true;
@@ -375,8 +374,6 @@
                 $(opt).parent().append(continue_receive_subscribe_success);
                 $('.email-first-share-wrapper').css('top', '-78px').css('left', '').css('right', '168px');
                 $('.email-btn-group a').css('display', 'block');
-                $('.email-first-share-wrapper').css('margin-left', '-194px');
-
             } else {
                 $('.share-article-container').append(continue_receive_subscribe_success);
             }
