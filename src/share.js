@@ -222,12 +222,19 @@
             '</div>';
 
         function pop_share_email_block(side, opt) {
-            if ($('.email-share-' + side + '-arrow').length == 1) {
-                $('.email-share-' + side + '-arrow').parent().remove();
-                return;
+            //remove this
+            if($(opt).parent().find('.email-share-wrapper').get(0) != undefined) {
+                $(opt).parent().find('.email-share-wrapper').get(0) .remove();
+                return ;
+            }
+
+            //remove other right
+            if ($('.email-share-right-arrow').length == 1) {
+                $('.email-share-right-arrow').parent().remove();
             }
 
             if (side == 'right') {
+                //remove other left
                 if ($('.email-share-left-arrow').length == 1) {
                     $('.email-share-left-arrow').parent().remove();
                 }
@@ -236,10 +243,6 @@
                 $('.email-share-wrapper').css('top', '-184px').css('left', '').css('right', '362px');
                 $('.email-btn-group a').css('display', 'block');
             } else {
-                if ($('.email-share-right-arrow').length == 1) {
-                    $('.email-share-right-arrow').parent().remove();
-                }
-
                 $('.share-article-container').append(share_email_pop_wrapper);
             }
 
@@ -435,7 +438,7 @@
         $(document).ready(function () {
 
             $('.share-email-left').click(function () {
-                pop_share_email_block('left');
+                pop_share_email_block('left', this);
             });
 
             $('.share-email-right').click(function () {
