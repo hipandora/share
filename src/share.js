@@ -246,16 +246,22 @@
             $('.email-share-wrapper b:first-child').addClass('email-share-' + side + '-arrow');
 
             $('.email-validate').each(function (index, item) {
-                $(item).keyup(listen_input_for_validate_email);
+                $(item).keyup(listen_input_for_validate_email).blur(function() {
+                    if(is_email($(item).val().trim())) {
+                        $(item).css('border-color', '#d2d2d2');
+                    }else{
+                        $(item).css('border-color', '#ff0000');
+                    }
+                });
             });
 
             $(":text").focus(function () {
-                $(this).css('border-color', '##008def');
+                $(this).css('border-color', '#008def');
             });
 
             $('.email-btn-group a').click(function () {
-                if (! ($('.email-validate:first').css('border-color') == 'rgb(0, 141, 223)' && $('.email-validate:first').val().trim().length != 0 &&
-                    $('.email-validate:last').css('border-color') == 'rgb(0, 141, 223)' && $('.email-validate:last').val().trim().length != 0 &&
+                if (! (is_email($('.email-validate:first').val().trim()) &&
+                    is_email($('.email-validate:last').val().trim()) &&
                     $('.email-share-info').val().trim().length != 0)) {
                     return ;
                 }
@@ -407,18 +413,22 @@
         }
 
         function listen_input_for_validate_email() {
-            var email_reg = /^\w+((-\w+)|(\.\w+))*\@[A-Za-z0-9]+((\.|-)[A-Za-z0-9]+)*\.[A-Za-z]+$/;
             var me = this;
             $.each($(this).val().trim().split(','), function (index, item) {
                 if (item.length === 0) {
                     return true;
                 }
-                if (email_reg.test(item)) {
+                if (is_email(item)) {
                     $(me).css('border-color', '#008DDF')
                 } else {
                     $(me).css('border-color', '#ff0000')
                 }
             });
+        }
+
+        function is_email(email) {
+            var email_reg = /^\w+((-\w+)|(\.\w+))*\@[A-Za-z0-9]+((\.|-)[A-Za-z0-9]+)*\.[A-Za-z]+$/;
+            return email_reg.test(email) ;
         }
 
 
