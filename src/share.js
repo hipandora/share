@@ -277,12 +277,12 @@
                 data['input_share_content'] = $('.email-share-info').val().trim();
                 data['title'] = $('.share-title').text().trim();
                 data['link'] = location.protocol + '//' + location.host + type_url_map[$('.user-tab-item-sel span').text()] + '?id=' + location.href.split('id=')[1].split('#')[0];
-                data['pic_url'] = location.protocol + '//' + location.host + $('.width660:first img').attr('src');
+                data['pic_url'] = $('.width660:first img')[0].src;
 
                 var me = this;
                 if ($(this).parents('.share-container').hasClass('share-pic-container')) {
                     data['link'] = data['link'] + '#' + $($(me).parents('.share-origin')[0]).find('img').attr('id');
-                    data['pic_url'] = location.protocol + '//' + location.host + $($(me).parents('.share-origin')[0]).find('img').attr('src');
+                    data['pic_url'] = $($(me).parents('.share-origin')[0]).find('img')[0].src;
                 }
 
                 $.post('/index/share-content-via-email', { data: data }).done(function (data) {
