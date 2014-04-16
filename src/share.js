@@ -228,10 +228,18 @@
             }
 
             if (side == 'right') {
+                if ($('.email-share-left-arrow').length == 1) {
+                    $('.email-share-left-arrow').parent().remove();
+                }
+
                 $(opt).parent().append(share_email_pop_wrapper);
                 $('.email-share-wrapper').css('top', '-184px').css('left', '').css('right', '362px');
                 $('.email-btn-group a').css('display', 'block');
             } else {
+                if ($('.email-share-right-arrow').length == 1) {
+                    $('.email-share-rigth-arrow').parent().remove();
+                }
+
                 $('.share-article-container').append(share_email_pop_wrapper);
             }
 
@@ -241,25 +249,15 @@
                 $(item).keyup(listen_input_for_validate_email);
             });
 
-            $(window).keyup(function () {
-                if ($('.email-validate:first').css('border-color') == 'rgb(0, 141, 223)' && $('.email-validate:first').val().trim().length != 0 &&
-                    $('.email-validate:last').css('border-color') == 'rgb(0, 141, 223)' && $('.email-validate:last').val().trim().length != 0 &&
-                    $('.email-share-info').val().trim().length != 0) {
-                    $('.email-btn-group a').removeClass('btn-white-large');
-                    $('.email-btn-group a').addClass('btn-blue-large');
-                } else {
-                    $('.email-btn-group a').removeClass('btn-white-large');
-                    $('.email-btn-group a').addClass('btn-white-large');
-                }
-            })
-
             $(":text").focus(function () {
                 $(this).css('border-color', '##008def');
             });
 
             $('.email-btn-group a').click(function () {
-                if ($(this).hasClass('btn-white-large')) {
-                    return;
+                if (! ($('.email-validate:first').css('border-color') == 'rgb(0, 141, 223)' && $('.email-validate:first').val().trim().length != 0 &&
+                    $('.email-validate:last').css('border-color') == 'rgb(0, 141, 223)' && $('.email-validate:last').val().trim().length != 0 &&
+                    $('.email-share-info').val().trim().length != 0)) {
+                    return ;
                 }
                 //send email now
                 pop_subscribe_after_share_over_email_block($.trim($('.email-address-self').val()), side, opt);
