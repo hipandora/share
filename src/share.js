@@ -259,9 +259,32 @@
                     $('.email-share-info').val().trim().length != 0)) {
                     return ;
                 }
-                //send email now
-                pop_subscribe_after_share_over_email_block($.trim($('.email-address-self').val()), side, opt);
-                $($(this).parent().parent().remove());
+
+                var type_url_map = {
+                    '旅行手记': '/index/viewNote',
+                    '准备秀': '/index/viewXiu'
+                };
+
+                var data = {};
+                data['from'] = $('.email-address-self').val().trim();
+                data['tos'] = $('.email-address-friend').val().trim().split(',');
+                data['input_share_content'] = $('.email-share-info').val().trim();
+                data['title'] = $('.share-title').text().trim();
+                data['link'] = location.protocol + '//' + location.host + type_url_map[$('.user-tab-item-sel span').text()] + '?id=' + location.href.split('id=')[1].split('#')[0];
+                data['pic_url'] = location.protocol + '//' + location.host + $('.width660:first img').attr('src');
+
+                var me = this;
+                if ($(this).parents('.share-container').hasClass('share-pic-container')) {
+                    data['link'] = data['link'] + '#' + $($(me).parents('.share-origin')[0]).find('img').attr('id');
+                    data['pic_url'] = location.protocol + '//' + location.host + $($(me).parents('.share-origin')[0]).find('img').attr('src');
+                }
+
+                $.post('/index/share-content-via-email', { data: data }).done(function (data) {
+                    pop_subscribe_after_share_over_email_block($.trim($('.email-address-self').val()), side, opt);
+                    $($(me).parent().parent().remove());
+                }).fail(function (data) {
+                        alert('邮件发送过程中出现问题，我们正在解决！');
+                    });
 
             });
 
