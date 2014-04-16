@@ -237,7 +237,7 @@
                 $('.email-btn-group a').css('display', 'block');
             } else {
                 if ($('.email-share-right-arrow').length == 1) {
-                    $('.email-share-rigth-arrow').parent().remove();
+                    $('.email-share-right-arrow').parent().remove();
                 }
 
                 $('.share-article-container').append(share_email_pop_wrapper);
