@@ -271,7 +271,11 @@
 
                 var type_url_map = {
                     '旅行手记': '/index/viewNote',
-                    '准备秀': '/index/viewXiu'
+                    '准备秀': '/index/viewXiu',
+
+
+                    '旅行手记_save': 'note',
+                    '准备秀_save': 'xiu'
                 };
 
                 var data = {};
@@ -279,13 +283,16 @@
                 data['tos'] = $('.email-address-friend').val().trim().split(',');
                 data['input_share_content'] = $('.email-share-info').val().trim();
                 data['title'] = $('.share-title').text().trim();
+                data['article_id'] = location.href.split('id=')[1].split('#')[0];
                 data['link'] = location.protocol + '//' + location.host + type_url_map[$('.user-tab-item-sel span').text()] + '?id=' + location.href.split('id=')[1].split('#')[0];
                 data['pic_url'] = $('.width660:first img')[0].src;
+                data['type_key'] = type_url_map[$('.user-tab-item-sel span').text() + '_save'] + '_article';
 
                 var me = this;
                 if ($(this).parents('.share-container').hasClass('share-pic-container')) {
                     data['link'] = data['link'] + '#' + $($(me).parents('.share-origin')[0]).find('img').attr('id');
                     data['pic_url'] = $($(me).parents('.share-origin')[0]).find('img')[0].src;
+                    data['type_key'] =  type_url_map[$('.user-tab-item-sel span').text() + '_save'] + '_pic';
                 }
 
                 $.post('/index/share-content-via-email', { data: data }).done(function (data) {
@@ -431,7 +438,14 @@
 
         function is_email(email) {
             var email_reg = /^\w+((-\w+)|(\.\w+))*\@[A-Za-z0-9]+((\.|-)[A-Za-z0-9]+)*\.[A-Za-z]+$/;
-            return email_reg.test(email) ;
+            var status = true ;
+            $.each(email.split(','), function (index, item) {
+                if (item.length == 0) {
+                    return true;
+                }
+                status = status && email_reg.test(item);
+            });
+            return  status;
         }
 
 
