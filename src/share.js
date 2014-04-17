@@ -245,6 +245,9 @@
             } else {
                 $('.share-article-container').append(share_email_pop_wrapper);
             }
+            
+            jQuery.placeholder.shim({selector:'.email-address-self'});
+            jQuery.placeholder.shim({selector:'.email-address-friend'});
 
             $('.email-share-wrapper b:first-child').addClass('email-share-' + side + '-arrow');
 
