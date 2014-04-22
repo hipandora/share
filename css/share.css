@@ -18,6 +18,10 @@
     right: -41px;
 }
 
+.share-items-group.none-like-item {
+    height: 138px;
+}
+
 .share-group {
     height: 134px;
 }
