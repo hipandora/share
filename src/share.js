@@ -67,7 +67,7 @@
         for (var p in param) {
             temp.push(p + '=' + encodeURIComponent(param[p] || ''))
         }
-        var option = $.extend({share_with_status: true, left: 0, right: 0, top: 0, bottom: 0}, options);
+        var option = $.extend({share_with_status: true, left: 0, right: 0, top: 0, bottom: 0, hide_like_item: false}, options);
         this.addClass('share-origin');
         var only_share_content = '<div class="share-group share-container share-pic-container">' +
             '<div class="group-item-sina">' +
@@ -94,7 +94,13 @@
             '<div class="group-item-like"></div>' +
             '</div>';
         if (option.share_with_status) {
-            $(share_with_status).appendTo(this).css('position', 'fixed').css('top', $(window).height() / 3).css('left', $('.white-bg').offset().left - 40).show();
+            var $share_with_status = $(share_with_status);
+            if (options.hide_like_item) {
+                $share_with_status.addClass('none-like-item');
+                $share_with_status.find('.group-item-line').remove();
+                $share_with_status.find('.group-item-like').remove();
+            }
+            $share_with_status.appendTo(this).css('position', 'fixed').css('top', $(window).height() / 3).css('left', $('.white-bg').offset().left - 40).show();
             // init like
             init_like( $(this).find('.group-item-like') );
         } else {
