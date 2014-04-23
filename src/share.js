@@ -182,10 +182,10 @@
     }
 
     $.share_email = function () {
-
+        var top = $('.group-item-like').length > 0 ? -190 : -146;
         // first step
         var share_email_pop_wrapper =
-            '<div class="email-share-wrapper" style="position: relative;left: 38px;top: -190px;background-color: #fff">' +
+            '<div class="email-share-wrapper" style="position: relative;left: 38px;top: '+ top +'px;background-color: #fff">' +
             '<b></b>' +
             '<a class="email-share-close " href="javascript:{}" >×</a>' +
             '<div class="email-share-header">给你的朋友发送邮件</div>' +
@@ -292,7 +292,7 @@
         }
 
         //second step
-        var subscribe_after_share_over_email = ' <div class="email-share-wrapper" style="position: relative;left: 38px;top: -190px;background-color: #fff">' +
+        var subscribe_after_share_over_email = ' <div class="email-share-wrapper" style="position: relative;left: 38px;top: '+ top +'px;background-color: #fff">' +
             '<b></b>' +
             '<a class="email-share-close">×</a>' +
             '<div class="email-share-succeed-header">邮件发送成功！</div>' +
@@ -344,18 +344,7 @@
                 $(this).parent().parent().remove();
             });
 
-            $(window).click(function () {
-                if ($('.receive-all-website-subscribe-content').prop('checked') || $('.receive-some-channel-subscribe-content').prop('checked')) {
-                    $('.continue-receive-subscribe').removeClass('btn-white-large').addClass('btn-blue-large');
-                } else {
-                    $('.continue-receive-subscribe').removeClass('btn-blue-large').addClass('btn-white-large');
-                }
-            });
-
             $('.continue-receive-subscribe').click(function () {
-                if ($(this).hasClass('btn-white-large')) {
-                    return;
-                }
                 var data = {}, me = this, upload_status = true;
                 data['email'] = email;
                 $('.email-checkbox-box :checked').each(function (index, item) {
@@ -380,8 +369,9 @@
         }
 
         //step three
+        var email_success_top = $('.group-item-like').length > 0 ? -86 : -42;
         var continue_receive_subscribe_success =
-            '<div class="email-first-share-wrapper" style="position: relative;left: 38px;top: -86px;background-color: #fff">' +
+            '<div class="email-first-share-wrapper" style="position: relative;left: 38px;top: '+ email_success_top +'px;background-color: #fff">' +
             '<b></b>' +
             '<a class="email-share-close">×</a>' +
             '<div class="email-share-succeed-header">太棒了！很快你会收到你的第一封邮件。</div>'
