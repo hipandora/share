@@ -49,7 +49,7 @@
         }
         var share_sentence = '';
         if(options['type'] === 'note') {
-            share_sentence = '从计划到出行，给你最真实的经历与经验分享，'
+            share_sentence = '从计划到出行，给你最真实的经验分享，'
         } else if (options['type'] === 'xiu') {
             share_sentence = '给你最真实的经历与经验分享，'
         }
@@ -134,10 +134,11 @@
 
         return this;
     };
-    $.render_share_count = function(){
+    $.render_share_count = function(options){
+        var type = options['type']
         function render_sina_share_counts(cb) {
             $.ajax({
-                url: 'https://api.weibo.com/2/short_url/shorten.json?url_long=' + encodeURIComponent($.share_url()) + '&access_token=2.00JT793DVzTAUE1549e8542b3w2R8E',
+                url: 'https://api.weibo.com/2/short_url/shorten.json?url_long=' + encodeURIComponent($.share_url(type)) + '&access_token=2.00JT793DVzTAUE1549e8542b3w2R8E',
                 type: "GET",
                 dataType: "jsonp",
                 success: function (short_url_result, textStatus, xhr) {
@@ -166,7 +167,7 @@
 
         function render_total_share_counts(article_share_count){
             $.ajax({
-                url: 'https://api.weibo.com/2/short_url/shorten.json?url_long=' + encodeURIComponent($.share_url() + '#the_user_item') + '&access_token=2.00JT793DVzTAUE1549e8542b3w2R8E',
+                url: 'https://api.weibo.com/2/short_url/shorten.json?url_long=' + encodeURIComponent($.share_url('type') + '#the_user_item') + '&access_token=2.00JT793DVzTAUE1549e8542b3w2R8E',
                 type: "GET",
                 dataType: "jsonp",
                 success: function (short_url_result, textStatus, xhr) {
