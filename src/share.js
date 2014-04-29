@@ -192,7 +192,7 @@
 
         function render_total_share_counts(article_share_count){
             $.ajax({
-                url: 'https://api.weibo.com/2/short_url/shorten.json?url_long=' + encodeURIComponent($.share_url('type') + '#the_user_item') + '&access_token=2.00JT793DVzTAUE1549e8542b3w2R8E',
+                url: 'https://api.weibo.com/2/short_url/shorten.json?url_long=' + encodeURIComponent($.share_url(type) + '#the_user_item') + '&access_token=2.00JT793DVzTAUE1549e8542b3w2R8E',
                 type: "GET",
                 dataType: "jsonp",
                 success: function (short_url_result, textStatus, xhr) {
