@@ -49,9 +49,9 @@
         }
         var share_sentence = '';
         if(options['type'] === 'note') {
-            share_sentence = '从计划到出行，给你最真实的经验分享，'
+            share_sentence = '从计划到出行，给你最真实的经历与经验分享，'
         } else if (options['type'] === 'xiu') {
-            share_sentence = '给你最真实的经历与经验分享，'
+            share_sentence = '给你最真实的经验分享，'
         }
         if ($($('.current-user-id')[0]).text().trim() == $('.note-author').text().trim()) {
             title += '我在@hi潘多拉网 创建了一篇' + partial_title + share_sentence + pre_url + (is_share_article ? '' : '#the_user_item') +' 大家赶紧来围观传阅吧～查看戳这里: ' ;
