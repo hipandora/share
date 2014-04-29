@@ -120,14 +120,39 @@
             init_like( $(this).find('.group-item-like') );
         } else {
             $(only_share_content).appendTo(this);
-            $($(this.parent().get(0)).parent().get(0)).mouseenter(function () {
-                $(this).find('.share-pic-container').css({display: 'block', left: option.left, right: option.right, top: option.top, bottom: option.bottom});
 
-            });
+            function show_pic_container($elem) {
+                $elem.find('.share-pic-container')
+                     .css({
+                        display: 'block', 
+                        left: option.left, 
+                        right: option.right, 
+                        top: option.top, 
+                        bottom: option.bottom
+                    });
+            }
 
-            $($(this.parent().get(0)).parent().get(0)).mouseleave(function () {
-                $(this).find('.share-pic-container').css('display', 'none');
-            });
+            function hide_pic_container($elem) {
+                $elem.find('.share-pic-container').css('display', 'none');
+            }
+
+            if(options['type'] === 'note') {
+                $($(this.parent().get(0)).parent().get(0)).mouseenter(function () {
+                    show_pic_container( $(this) );
+                });
+
+                $($(this.parent().get(0)).parent().get(0)).mouseleave(function () {
+                    hide_pic_container( $(this) );
+                });    
+            } else if (options['type'] === 'xiu') {
+                $(this).on('mouseenter', function() {
+                    show_pic_container( $(this) );
+                });
+
+                $(this).on('mouseleave', function() {
+                    hide_pic_container( $(this) );
+                });
+            }
         }
 
 
