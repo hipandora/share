@@ -8,8 +8,14 @@
 
 (function ($) {
 
-    $.share_url = function(){
-        return location.origin + '/index/viewNote?id=' + location.href.split('#')[0].split('=')[1];
+    var SHARE_URL = {
+        'note': '/index/viewNote',
+        'xiu': '/index/viewXiu',
+    }
+
+    $.share_url = function(type){
+        return location.origin + SHARE_URL[type] +'?id='
+            + location.href.split('#')[0].split('=')[1];
     }
 
     $.fn.share = function (options) {
@@ -26,7 +32,7 @@
         }
 
         var title = '';
-        var pre_url =  $.share_url();
+        var pre_url =  $.share_url(option['type']);
         var day_text = '',
             share_count = $('.share-note-day-count').text().trim();
         if( share_count && share_count.length > 0)
@@ -41,9 +47,14 @@
             pic_anchor = pre_url + '#' + this.children('img').attr('id');
             is_share_article = false ;
         }
-
+        var share_sentence = '';
+        if(option['type'] === 'note') {
+            share_sentence = '从计划到出行，给你最真实的经历与经验分享，'
+        } else if (option['type'] === 'xiu') {
+            share_sentence = '给你最真实的经历与经验分享，'
+        }
         if ($($('.current-user-id')[0]).text().trim() == $('.note-author').text().trim()) {
-            title += '我在@hi潘多拉网 创建了一篇' + partial_title + '从计划到出行，给你最真实的经历与经验分享，'+pre_url + (is_share_article ? '' : '#the_user_item') +' 大家赶紧来围观传阅吧～查看戳这里: ' ;
+            title += '我在@hi潘多拉网 创建了一篇' + partial_title + share_sentence + pre_url + (is_share_article ? '' : '#the_user_item') +' 大家赶紧来围观传阅吧～查看戳这里: ' ;
         } else {
             title += '我发现了一篇很实用的' + partial_title + '并分享给大家！' + pre_url + (is_share_article ? '' : '#the_user_item') + '（分享自@hi潘多拉网 ） 查看戳这里: ';
         }
