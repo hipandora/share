@@ -260,11 +260,11 @@
 
                 var type_url_map = {
                     '旅行手记': '/index/viewNote',
-                    '准备秀': '/index/viewXiu',
+                    '装备秀': '/index/viewXiu',
 
 
                     '旅行手记_save': 'note',
-                    '准备秀_save': 'xiu'
+                    '装备秀_save': 'xiu'
                 };
 
                 var data = {};
