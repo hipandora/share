@@ -32,7 +32,7 @@
         }
 
         var title = '';
-        var pre_url =  $.share_url(option['type']);
+        var pre_url =  $.share_url(options['type']);
         var day_text = '',
             share_count = $('.share-note-day-count').text().trim();
         if( share_count && share_count.length > 0)
@@ -48,9 +48,9 @@
             is_share_article = false ;
         }
         var share_sentence = '';
-        if(option['type'] === 'note') {
+        if(options['type'] === 'note') {
             share_sentence = '从计划到出行，给你最真实的经历与经验分享，'
-        } else if (option['type'] === 'xiu') {
+        } else if (options['type'] === 'xiu') {
             share_sentence = '给你最真实的经历与经验分享，'
         }
         if ($($('.current-user-id')[0]).text().trim() == $('.note-author').text().trim()) {
