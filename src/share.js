@@ -27,8 +27,12 @@
 
         var title = '';
         var pre_url =  $.share_url();
+        var day_text = '',
+            share_count = $('.share-note-day-count').text().trim();
+        if( share_count && share_count.length > 0)
+            day_text = share_count + '天/'
 
-        var partial_title = '#' + $('.share-note-type').text().trim() + '#：' + $(".share-title").text().trim() + '［' + $('.share-note-day-count').text().trim() + '天/' + $('.img-box').length + '图］，'
+        var partial_title = '#' + $('.share-note-type').text().trim() + '#：' + $(".share-title").text().trim() + '［' + day_text + $('.img-box').length + '图］，'
 
         var pic_anchor = pre_url;
 
