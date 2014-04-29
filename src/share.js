@@ -182,7 +182,9 @@
     }
 
     $.share_email = function () {
-        var top = $('.group-item-like').length > 0 ? -190 : -146;
+        var top = $('.group-item-like').length > 0 ? -190 : -146,
+            shared_topic_title = $('.share-note-type').text().trim();
+
         // first step
         var share_email_pop_wrapper =
             '<div class="email-share-wrapper" style="position: relative;left: 38px;top: '+ top +'px;background-color: #fff">' +
@@ -192,7 +194,9 @@
             '<div class="email-input-box">' +
             '<input type="text" class="email-address-self email-validate" placeholder="你的邮箱"/>' +
             '<input type="text" class="email-address-friend email-validate" placeholder="朋友的邮箱（多个邮箱用逗号间隔）"/>' +
-            '<textarea type="text" class="email-share-info">嘿，我发现了Hi潘多拉这篇有趣的手记，并发送给你。</textarea>' +
+            '<textarea type="text" class="email-share-info">' +
+                '嘿，我发现了Hi潘多拉这篇有趣的' + shared_topic_title + '，并发送给你。' +
+            '</textarea>' +
             '</div>' +
             '<div class="email-btn-group">' +
             '<a class="btn-white-large">发送</a>' +
