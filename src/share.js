@@ -13,12 +13,12 @@
         'xiu': '/index/viewXiu',
     }
 
+    if(!location.origin) {
+        location.origin =  location.protocol + '//' + location.hostname + 
+            (location.port ? (':' + location.port) : '');
+    }       
+
     $.share_url = function(type){
-        if(!location.origin) {
-            location.origin =  location.protocol + '//' + location.hostname + 
-                (location.port ? (':' + location.port) : '');
-        }
-        
         return location.origin + SHARE_URL[type] +'?id='
             + location.href.split('#')[0].split('=')[1];
     }
