@@ -23,6 +23,11 @@
             + location.href.split('#')[0].split('=')[1];
     }
 
+    $.remove_previous_pop = function() {
+        $('.email-share-wrapper').remove();
+        $('.copy-link').remove();
+    };
+
     $.fn.share = function (options) {
         var _w = 32 , _h = 32, pic = '', origin = window.location.origin;
 
@@ -158,7 +163,9 @@
                     hide_pic_container( $(this) );
                 });
             }
+            $.share_link($(this));
         }
+        $.share_email();
 
 
 
@@ -224,7 +231,6 @@
         render_sina_share_counts(function(num) {
           render_total_share_counts(num);
         });
-        $.share_email();
     }
 
     $.share_email = function () {
@@ -481,5 +487,31 @@
             });
         });
     }
+    $.share_link = function ($share_origin) {
+        $share_origin.find('.group-item-link')
+            .click(function () {
+                pop_share_link_input();
+            });
+
+        function pop_share_link_input() {
+            $.remove_previous_pop();
+            var pic_anchor = $.share_url() + '#' + $share_origin.find('img').attr('id');
+            var share_link_elem =
+                '<div style="" class="copy-link">' +
+                    '<input class="copy-link-input" type="text" value="' + pic_anchor + '">' +
+                    '</div>';
+            var $share_link_elem = $(share_link_elem);
+            $share_origin.find('.share-group')
+                .append($share_link_elem);
+            var $input = $share_link_elem.find('input');
+            $input.select();
+            $input.on('copy', function () {
+                setTimeout(function () {
+                    $share_link_elem.remove();
+                }, 0);
+            });
+        }
+    };
+
 
 }(jQuery));
