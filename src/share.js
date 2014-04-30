@@ -256,6 +256,7 @@
             '</div>';
 
         function pop_share_email_block(side, opt) {
+            $.remove_previous_pop();
             //remove this
             if($(opt).parent().find('.email-share-wrapper').get(0) != undefined) {
                 $(opt).parent().find('.email-share-wrapper').get(0) .remove();
