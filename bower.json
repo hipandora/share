@@ -1,6 +1,6 @@
 {
   "name": "share",
-  "version": "0.0.45",
+  "version": "0.0.46",
   "dependencies": {},
   "devDependencies": {
     "qunit": "~1.12.0",
