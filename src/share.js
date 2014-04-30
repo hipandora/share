@@ -163,7 +163,7 @@
                     hide_pic_container( $(this) );
                 });
             }
-            $.share_link($(this));
+            $.share_link($(this), option['type']);
         }
         $.share_email();
 
@@ -487,7 +487,7 @@
             });
         });
     }
-    $.share_link = function ($share_origin) {
+    $.share_link = function ($share_origin, share_type) {
         $share_origin.find('.group-item-link')
             .click(function () {
                 pop_share_link_input();
@@ -495,7 +495,7 @@
 
         function pop_share_link_input() {
             $.remove_previous_pop();
-            var pic_anchor = $.share_url() + '#' + $share_origin.find('img').attr('id');
+            var pic_anchor = $.share_url(share_type) + '#' + $share_origin.find('img').attr('id');
             var share_link_elem =
                 '<div style="" class="copy-link">' +
                     '<input class="copy-link-input" type="text" value="' + pic_anchor + '">' +
