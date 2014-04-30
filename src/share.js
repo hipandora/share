@@ -259,7 +259,7 @@
             $.remove_previous_pop();
             //remove this
             if($(opt).parent().find('.email-share-wrapper').get(0) != undefined) {
-                $(opt).parent().find('.email-share-wrapper').get(0) .remove();
+                $(opt).parent().find('.email-share-wrapper').get(0).remove();
                 return ;
             }
 
