@@ -101,8 +101,8 @@
             '</div>' +
             '</div>' +
             '<div class="group-item-weixin"></div>' +
-            '<div class="group-item-email share-email-right"></div>' +
-            '<div class="group-item-link group-last-item"></div>' +
+            '<div class="sticky-popup group-item-email share-email-right"></div>' +
+            '<div class="sticky-popup group-item-link group-last-item"></div>' +
             '</div>';
         var share_with_status = '<div class="share-items-group share-container share-article-container">' +
             '<div class="group-item-sina group-item-has-num">' +
@@ -114,7 +114,7 @@
             '<div class="group-item-weixin group-item-has-num" style="">' +
             '<span class="group-item-num weixin-share-count" style="position: relative; left:-2px;top:-6px;text-align:center;color: #828282">0</span>' +
             '</div>' +
-            '<div class="group-item-email-gray share-email-left"></div>' +
+            '<div class="sticky-popup group-item-email-gray share-email-left"></div>' +
             '<div class="group-item-line"></div>' +
             '<div class="group-item-like"></div>' +
             '</div>';
@@ -166,8 +166,7 @@
             $.share_link($(this), option['type']);
         }
         $.share_email();
-
-
+        $.bind_show_hide_share_popup();
 
         return this;
     };
@@ -239,7 +238,7 @@
 
         // first step
         var share_email_pop_wrapper =
-            '<div class="email-share-wrapper" style="position: relative;left: 38px;top: '+ top +'px;background-color: #fff">' +
+            '<div class="sticky-popup email-share-wrapper" style="position: relative;left: 38px;top: '+ top +'px;background-color: #fff">' +
             '<b></b>' +
             '<a class="email-share-close " href="javascript:{}" >×</a>' +
             '<div class="email-share-header">给你的朋友发送邮件</div>' +
@@ -349,7 +348,7 @@
         }
 
         //second step
-        var subscribe_after_share_over_email = ' <div class="email-share-wrapper" style="position: relative;left: 38px;top: '+ top +'px;background-color: #fff">' +
+        var subscribe_after_share_over_email = ' <div class="sticky-popup email-share-wrapper" style="position: relative;left: 38px;top: '+ top +'px;background-color: #fff">' +
             '<b></b>' +
             '<a class="email-share-close">×</a>' +
             '<div class="email-share-succeed-header">邮件发送成功！</div>' +
@@ -498,7 +497,7 @@
             $.remove_previous_pop();
             var pic_anchor = $.share_url(share_type) + '#' + $share_origin.find('img').attr('id');
             var share_link_elem =
-                '<div style="" class="copy-link">' +
+                '<div class="sticky-popup copy-link">' +
                     '<input class="copy-link-input" type="text" value="' + pic_anchor + '">' +
                     '</div>';
             var $share_link_elem = $(share_link_elem);
@@ -514,5 +513,15 @@
         }
     };
 
+  $.bind_show_hide_share_popup = function () {
+    $(document.body).click(function () {
+      $.remove_previous_pop();
+    });
+
+    $(document.body).on('click', '.sticky-popup', function (e) {
+      e.stopPropagation();
+      e.preventDefault();
+    });
+  };
 
 }(jQuery));
