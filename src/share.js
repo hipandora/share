@@ -255,13 +255,13 @@
             '</div>';
 
         function pop_share_email_block(side, opt) {
-            $.remove_previous_pop();
             //remove this
             if($(opt).parent().find('.email-share-wrapper').get(0) != undefined) {
                 $(opt).parent().find('.email-share-wrapper').get(0).remove();
                 return ;
             }
 
+            $.remove_previous_pop();
             //remove other right
             if ($('.email-share-right-arrow').length == 1) {
                 $('.email-share-right-arrow').parent().remove();
