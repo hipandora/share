@@ -127,6 +127,7 @@
             }
             $share_with_status.appendTo(this).css('position', 'fixed').css('top', $(window).height() / 3).css('left', $('.white-bg').offset().left - 40).show();
             // init like
+            $.share_email($(this), 'left');
             init_like( $(this).find('.group-item-like') );
         } else {
             $(only_share_content).appendTo(this);
@@ -163,9 +164,9 @@
                     hide_pic_container( $(this) );
                 });
             }
+            $.share_email($(this), 'right');
             $.share_link($(this), option['type']);
         }
-        $.share_email();
         $.bind_show_hide_share_popup();
 
         return this;
@@ -232,8 +233,12 @@
         });
     }
 
-    $.share_email = function () {
-        var top = $('.group-item-like').length > 0 ? -190 : -146,
+    $.share_email = function ($share_origin, side) {
+      $share_origin.find('.share-email-' + side).click(function () {
+        pop_share_email_block(side, this);
+      });
+
+      var top = $('.group-item-like').length > 0 ? -190 : -146,
             shared_topic_title = $('.share-note-type').text().trim();
 
         // first step
@@ -476,18 +481,6 @@
             });
             return  status;
         }
-
-
-        $(document).ready(function () {
-
-            $('.share-email-left').click(function () {
-                pop_share_email_block('left', this);
-            });
-
-            $('.share-email-right').click(function () {
-                pop_share_email_block('right', this);
-            });
-        });
     }
     $.share_link = function ($share_origin, share_type) {
         $share_origin.find('.group-item-link')
