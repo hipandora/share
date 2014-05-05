@@ -547,6 +547,14 @@
                     $share_link_elem.remove();
                 }, 0);
             });
+
+            if(location.pathname=='/person/toCreateCityFood'){
+                $share_link_elem.css({
+                    top: '31px',
+                    right: '10px'
+                });
+            }
+
         }
     };
 
