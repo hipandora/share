@@ -11,16 +11,23 @@
     var SHARE_URL = {
         'note': '/index/viewNote',
         'xiu': '/index/viewXiu',
+        'food': '/index/cityFood'
     }
 
     if(!location.origin) {
-        location.origin =  location.protocol + '//' + location.hostname + 
+        location.origin =  location.protocol + '//' + location.hostname +
             (location.port ? (':' + location.port) : '');
-    }       
+    }
 
     $.share_url = function(type){
+        var id = null;
+        if(type == 'food'){
+            id =  $('.food_id').text();
+        }else{
+            id = location.href.split('#')[0].split('=')[1]
+        }
         return location.origin + SHARE_URL[type] +'?id='
-            + location.href.split('#')[0].split('=')[1];
+            + id;
     }
 
     $.remove_previous_pop = function() {
@@ -62,11 +69,16 @@
             share_sentence = '从计划到出行，给你最真实的经历与经验分享，'
         } else if (options['type'] === 'xiu') {
             share_sentence = '给你最真实的经验分享，'
+        }else if(options['type'] == 'food'){
+            is_share_article = true ;
         }
         if ($($('.current-user-id')[0]).text().trim() == $('.note-author').text().trim()) {
             title += '我在@hi潘多拉网 创建了一篇' + partial_title + share_sentence + pre_url + (is_share_article ? '' : '#the_user_item') +' 大家赶紧来围观传阅吧～查看戳这里: ' ;
         } else {
             title += '我发现了一篇很实用的' + partial_title + '并分享给大家！' + pre_url + (is_share_article ? '' : '#the_user_item') + '（分享自@hi潘多拉网 ） 查看戳这里: ';
+        }
+        if(options['type'] == 'food'){
+            title = '我发现了一道很棒的' + '#目的地美食#：' + ',并分享给大家！' + pre_url + '（分享自@hi潘多拉网 ） 查看戳这里: ';
         }
         var param = {
             url: pic_anchor,
@@ -135,10 +147,10 @@
             function show_pic_container($elem) {
                 $elem.find('.share-pic-container')
                      .css({
-                        display: 'block', 
-                        left: option.left, 
-                        right: option.right, 
-                        top: option.top, 
+                        display: 'block',
+                        left: option.left,
+                        right: option.right,
+                        top: option.top,
                         bottom: option.bottom
                     });
             }
@@ -154,7 +166,7 @@
 
                 $($(this.parent().get(0)).parent().get(0)).mouseleave(function () {
                     hide_pic_container( $(this) );
-                });    
+                });
             } else if (options['type'] === 'xiu') {
                 $(this).on('mouseenter', function() {
                     show_pic_container( $(this) );
@@ -241,6 +253,13 @@
       var top = $('.group-item-like').length > 0 ? -190 : -146,
             shared_topic_title = $('.share-note-type').text().trim();
 
+
+        //share food
+        var share_food = false;
+        if(location.pathname == '/person/toCreateCityFood'){
+            share_food = true;
+        }
+
         // first step
         var share_email_pop_wrapper =
             '<div class="sticky-popup email-share-wrapper" style="position: relative;left: 38px;top: '+ top +'px;background-color: #fff">' +
@@ -286,7 +305,7 @@
             } else {
                 $('.share-article-container').append(share_email_pop_wrapper);
             }
-            
+
             jQuery.placeholder.shim({selector:'.email-address-self'});
             jQuery.placeholder.shim({selector:'.email-address-friend'});
 
@@ -316,20 +335,29 @@
                 var type_url_map = {
                     '旅行手记': '/index/viewNote',
                     '装备秀': '/index/viewXiu',
+                    '目的地美食': 'index/cityFood',
 
 
                     '旅行手记_save': 'note',
-                    '装备秀_save': 'xiu'
+                    '装备秀_save': 'xiu',
+                    '目的地美食_save': 'food'
                 };
+
+                var article_id = null;
+                if(location.pathname == '/person/toCreateCityFood'){
+                    article_id =  $('.food_id').text();
+                }else{
+                    article_id = location.href.split('id=')[1].split('#')[0];
+                }
 
                 var data = {};
                 data['from'] = $('.email-address-self').val().trim();
                 data['tos'] = $('.email-address-friend').val().trim().split(',');
                 data['input_share_content'] = $('.email-share-info').val().trim();
                 data['title'] = $('.share-title').text().trim();
-                data['article_id'] = location.href.split('id=')[1].split('#')[0];
-                data['link'] = location.protocol + '//' + location.host + type_url_map[$('.user-tab-item-sel span').text()] + '?id=' + location.href.split('id=')[1].split('#')[0];
-                data['pic_url'] = $('.width660:first img')[0].src;
+                data['article_id'] = article_id;
+                data['link'] = location.protocol + '//' + location.host + type_url_map[$('.user-tab-item-sel span').text()] + '?id=' + article_id;
+                data['pic_url'] = $('.width660:first img').length != 0 ? $('.width660:first img')[0].src : $('.img-box img')[0].src;
                 data['type_key'] = type_url_map[$('.user-tab-item-sel span').text() + '_save'] + '_article';
 
                 var me = this;
@@ -351,6 +379,11 @@
             $('.email-share-close').click(function () {
                 $(this).parent().remove();
             });
+
+            if(share_food) {
+                $('.email-share-wrapper').css('top', '36px').css('right', '160px');
+                $('.email-share-wrapper b:first').removeClass().addClass('email-share-top-arrow');
+            }
 
         }
 
@@ -429,6 +462,11 @@
                     });
 
             });
+
+            if(share_food) {
+                $('.email-share-wrapper').css('top', '36px').css('right', '160px');
+                $('.email-share-wrapper b:first').removeClass().addClass('email-share-top-arrow');
+            }
         }
 
         //step three
@@ -453,6 +491,10 @@
             $('.email-share-close').click(function () {
                 $(this).parent().remove();
             });
+            if(share_food) {
+                $('.email-first-share-wrapper').css('top', '36px').css('right', '160px');
+                $('.email-first-share-wrapper b:first').removeClass().addClass('email-share-top-arrow');
+            }
 
         }
 
