@@ -30,12 +30,57 @@
             + id;
     }
 
-    $.remove_previous_pop = function() {
+    function remove_previous_pop () {
         $('.email-share-wrapper').remove();
         $('.copy-link').remove();
-    };
+    }
 
-    $.fn.share = function (options) {
+    function bind_close_share_popup () {
+        $(document.body).click(function () {
+           remove_previous_pop();
+        });
+
+        $(document.body).on('click', '.sticky-popup', function (e) {
+            e.stopPropagation();
+            e.preventDefault();
+        });
+    }
+
+    function share_link ($share_origin, share_type) {
+        $share_origin.find('.group-item-link')
+            .click(function () {
+              pop_share_link_input();
+            });
+
+        function pop_share_link_input() {
+            bind_close_share_popup();
+            remove_previous_pop();
+            var pic_anchor = $.share_url(share_type) + '#' + $share_origin.find('img').attr('id');
+            var share_link_elem =
+                '<div class="sticky-popup copy-link">' +
+                    '<input class="copy-link-input" type="text" value="' + pic_anchor + '">' +
+                    '</div>';
+            var $share_link_elem = $(share_link_elem);
+            $share_origin.find('.share-group')
+                .append($share_link_elem);
+            var $input = $share_link_elem.find('input');
+            $input.select();
+            $input.on('copy', function () {
+              setTimeout(function () {
+                $share_link_elem.remove();
+              }, 0);
+            });
+
+            if(location.pathname=='/person/toCreateCityFood'){
+                $share_link_elem.css({
+                  top: '31px',
+                  right: '10px'
+                });
+            }
+        }
+    }
+
+  $.fn.share = function (options) {
         var _w = 32 , _h = 32, pic = '', origin = window.location.origin;
 
 
@@ -177,13 +222,12 @@
                 });
             }
             $.share_email($(this), 'right');
-            $.share_link($(this), option['type']);
+            share_link($(this), option['type']);
         }
 
         return this;
     };
     $.render_share_count = function(options){
-        $.bind_close_share_popup();
         var type = options['type']
         function render_sina_share_counts(cb) {
             $.ajax({
@@ -279,6 +323,7 @@
             '</div>';
 
         function pop_share_email_block(side, opt) {
+          bind_close_share_popup();
             $('.copy-link').remove();
             //remove this
             if($(opt).parent().find('.email-share-wrapper').get(0) != undefined) {
@@ -522,49 +567,5 @@
             return  status;
         }
     }
-    $.share_link = function ($share_origin, share_type) {
-        $share_origin.find('.group-item-link')
-            .click(function () {
-                pop_share_link_input();
-            });
-
-        function pop_share_link_input() {
-            $.remove_previous_pop();
-            var pic_anchor = $.share_url(share_type) + '#' + $share_origin.find('img').attr('id');
-            var share_link_elem =
-                '<div class="sticky-popup copy-link">' +
-                    '<input class="copy-link-input" type="text" value="' + pic_anchor + '">' +
-                    '</div>';
-            var $share_link_elem = $(share_link_elem);
-            $share_origin.find('.share-group')
-                .append($share_link_elem);
-            var $input = $share_link_elem.find('input');
-            $input.select();
-            $input.on('copy', function () {
-                setTimeout(function () {
-                    $share_link_elem.remove();
-                }, 0);
-            });
-
-            if(location.pathname=='/person/toCreateCityFood'){
-                $share_link_elem.css({
-                    top: '31px',
-                    right: '10px'
-                });
-            }
-
-        }
-    };
-
-  $.bind_close_share_popup = function () {
-    $(document.body).click(function () {
-      $.remove_previous_pop();
-    });
-
-    $(document.body).on('click', '.sticky-popup', function (e) {
-      e.stopPropagation();
-      e.preventDefault();
-    });
-  };
 
 }(jQuery));
