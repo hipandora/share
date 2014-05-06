@@ -399,7 +399,7 @@
                 data['input_share_content'] = $('.email-share-info').val().trim();
                 data['title'] = $('.share-title').text().trim();
                 data['article_id'] = article_id;
-                data['link'] = location.protocol + '//' + location.host + type_url_map[$('.user-tab-item-sel span').text()] + '?id=' + article_id;
+                data['link'] = location.protocol + '//' + location.host + '/' +type_url_map[$('.user-tab-item-sel span').text()] + '?id=' + article_id;
                 data['pic_url'] = $('.width660:first img').length != 0 ? $('.width660:first img')[0].src : $('.img-box img')[0].src;
                 data['type_key'] = type_url_map[$('.user-tab-item-sel span').text() + '_save'] + '_article';
 
