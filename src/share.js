@@ -179,11 +179,11 @@
             $.share_email($(this), 'right');
             $.share_link($(this), option['type']);
         }
-        $.bind_show_hide_share_popup();
 
         return this;
     };
     $.render_share_count = function(options){
+        $.bind_close_share_popup();
         var type = options['type']
         function render_sina_share_counts(cb) {
             $.ajax({
@@ -279,9 +279,7 @@
             '</div>';
 
         function pop_share_email_block(side, opt) {
-            if ($('.copy-link').length > 0) {
-              $('.copy-link').remove();
-            }
+            $('.copy-link').remove();
             //remove this
             if($(opt).parent().find('.email-share-wrapper').get(0) != undefined) {
                 $(opt).parent().find('.email-share-wrapper').get(0).remove();
@@ -558,7 +556,7 @@
         }
     };
 
-  $.bind_show_hide_share_popup = function () {
+  $.bind_close_share_popup = function () {
     $(document.body).click(function () {
       $.remove_previous_pop();
     });
