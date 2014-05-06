@@ -12,7 +12,9 @@
         'note': '/index/viewNote',
         'xiu': '/index/viewXiu',
         'food': '/index/cityFood'
-    }
+    };
+
+    var share_initialize = false;
 
     if(!location.origin) {
         location.origin =  location.protocol + '//' + location.hostname +
@@ -53,7 +55,6 @@
             });
 
         function pop_share_link_input() {
-            bind_close_share_popup();
             remove_previous_pop();
             var pic_anchor = $.share_url(share_type) + '#' + $share_origin.find('img').attr('id');
             var share_link_elem =
@@ -81,6 +82,10 @@
     }
 
   $.fn.share = function (options) {
+      if (!share_initialize) {
+        bind_close_share_popup();
+        share_initialize = true;
+      }
         var _w = 32 , _h = 32, pic = '', origin = window.location.origin;
 
 
@@ -323,7 +328,6 @@
             '</div>';
 
         function pop_share_email_block(side, opt) {
-          bind_close_share_popup();
             $('.copy-link').remove();
             //remove this
             if($(opt).parent().find('.email-share-wrapper').get(0) != undefined) {
