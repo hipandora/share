@@ -52,10 +52,14 @@
               pop_share_link_input();
             });
 
+        var id = $share_origin.find('img').attr('id');
+        if(!id){
+            id = $share_origin.parent().parent().attr('id');
+        }
         function pop_share_link_input() {
             bind_close_share_popup();
             remove_previous_pop();
-            var pic_anchor = $.share_url(share_type) + '#' + $share_origin.find('img').attr('id');
+            var pic_anchor = $.share_url(share_type) + '#' + id;
             var share_link_elem =
                 '<div class="sticky-popup copy-link">' +
                     '<input class="copy-link-input" type="text" value="' + pic_anchor + '">' +
@@ -85,7 +89,13 @@
 
 
         if (!$(this).hasClass('share_with_status')) {
-            pic = $(this).children().attr('src').indexOf('http') != -1 ? $(this).children().attr('src') : origin + $(this).children().attr('src');
+            pic = '';
+            try{
+                pic = $(this).children().attr('src').indexOf('http') != -1 ? $(this).children().attr('src') : origin + $(this).children().attr('src');
+            }catch(e){
+                pic = '';
+            }
+
         } else {
             pic = $.map($('.share_with_status img'),function (item, index) {
                 var $img = $(item);
@@ -117,6 +127,11 @@
         }else if(options['type'] == 'food'){
             is_share_article = true ;
         }
+
+        if(pic == ''){
+            is_share_article = false;
+        }
+
         if ($($('.current-user-id')[0]).text().trim() == $('.note-author').text().trim()) {
             title += '我在@hi潘多拉网 创建了一篇' + partial_title + share_sentence + pre_url + (is_share_article ? '' : '#the_user_item') +' 大家赶紧来围观传阅吧～查看戳这里: ' ;
         } else {
@@ -405,8 +420,14 @@
 
                 var me = this;
                 if ($(this).parents('.share-container').hasClass('share-pic-container')) {
-                    data['link'] = data['link'] + '#' + $($(me).parents('.share-origin')[0]).find('img').attr('id');
-                    data['pic_url'] = $($(me).parents('.share-origin')[0]).find('img')[0].src;
+                    var pic_url = '';
+                    try{
+                        pic_url = $($(me).parents('.share-origin')[0]).find('img')[0].src;
+                    }catch(e){
+                        pic_url = $($(me).parents('.preview-pre-content-box').find('img')[0])[0].src;
+                    }
+                    data['link'] = data['link'] + '#' + pic_url;
+                    data['pic_url'] = pic_url;
                     data['type_key'] =  type_url_map[$('.user-tab-item-sel span').text() + '_save'] + '_pic';
                 }
 
