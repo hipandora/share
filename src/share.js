@@ -450,10 +450,9 @@
                         template += '<span style="float: left; padding-right: 10px; background-color: #ffffff;">'+$(item).find('.remark').text()+'</span>';
                         template += '<span style="float: right; padding-left: 10px; background-color: #ffffff;">'+$(item).find('.unit').text()+'</span>';
                         template += '<div style="clear: both;"></div>' + '</div>';
-                        template += '<br><br>';
 
                     });
-                    template += '</div>' + '</div>' + '</div>' ;
+                    template += '</div>' + '</div>' + '</div>' + '<br><br>' ;
                     data['share_day'] = template;
                 }
 
