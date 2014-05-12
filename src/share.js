@@ -414,19 +414,59 @@
                 data['input_share_content'] = $('.email-share-info').val().trim();
                 data['title'] = $('.share-title').text().trim();
                 data['article_id'] = article_id;
-                data['link'] = location.protocol + '//' + location.host + '/' +type_url_map[$('.user-tab-item-sel span').text()] + '?id=' + article_id;
+                data['link'] = location.protocol + '//' + location.host + type_url_map[$('.user-tab-item-sel span').text()] + '?id=' + article_id;
                 data['pic_url'] = $('.width660:first img').length != 0 ? $('.width660:first img')[0].src : $('.img-box img')[0].src;
                 data['type_key'] = type_url_map[$('.user-tab-item-sel span').text() + '_save'] + '_article';
 
                 var me = this;
+                if($($(me).parents('.share-origin')[0]).find('.day-trip').length ==1 ){
+                    var $item = $(me).parents('.preview-content-item');
+                    var $item_preview_header = $($item.find('.preview-day-num')).children();
+                    var day_index = $($item_preview_header[0]).text();
+                    var day = $($item_preview_header[1]).text();
+                    var day_week = $($item_preview_header[2]).text();
+                    var trip_list = $($item.find('.day-trip-list>span')).text();
+                    var day_cost = $item.find('.day-cost').text();
+                    var day_cost_list = $item.find('.day-cost-list>ul>li');
+
+                    var template = '<div style="width: 640px; margin-left: auto; margin-right: auto;">' +
+                        '<div style="width: 630px; height: 42px; line-height: 44px; padding-left: 10px; background: url(http://ww4.sinaimg.cn/large/82577871tw1egbhujif72j20d2016mwx.jpg) no-repeat 0 0; box-shadow: 0px 0px 5px gray;border-radius: 2px;">' +
+                        '<span style="font-size: 20px; font-weight: bold; margin-right: 20px;">' + day_index+ ' </span>' +
+                        '<span style="font-size: 20px; font-weight: bold; margin-right: 20px;">'+day+'</span>' +
+                        '<span style="font-size: 20px; font-weight: bold; margin-right: 20px;">'+day_week+'</span>' +
+                        '</div>' +
+                        '<div style="width: 580px;padding: 15px; margin-top: 40px; margin-left: auto; margin-right: auto; border: 1px solid #d2d2d2;">' +
+                        '<div style="color: red; font-size: 12px;">当日行程:</div>' +
+                        '<div style="font-size: 14px; margin: 20px auto;">' + trip_list +
+                        '</div>' +
+                        '<div style="font-size: 12px;">' +
+                        '<span style="color: red;">当日开销:</span>' +
+                        '<span> ' + day_cost+ '</span>' +
+                        '</div>' +
+                        '<div style="font-size: 14px; margin: 20px auto;">' ;
+                    day_cost_list.each(function(index, item){
+                        template += '<div style="margin: 5px auto; background: url(http://ww2.sinaimg.cn/large/82577871tw1egbidgeqixj20030010pw.jpg) repeat-x 0 50%;">' ;
+                        template += '<span style="float: left; background-color: #ffffff;">'+$(item).find('.index').text()+'</span>';
+                        template += '<span style="float: left; padding-right: 10px; background-color: #ffffff;">'+$(item).find('.remark').text()+'</span>';
+                        template += '<span style="float: right; padding-left: 10px; background-color: #ffffff;">'+$(item).find('.unit').text()+'</span>';
+                        template += '<div style="clear: both;"></div>' + '</div>';
+                        template += '<br><br>';
+
+                    });
+                    template += '</div>' + '</div>' + '</div>' ;
+                    data['share_day'] = template;
+                }
+
                 if ($(this).parents('.share-container').hasClass('share-pic-container')) {
-                    var pic_url = '';
+                    var pic_url = '', pic_anchor = '';
                     try{
                         pic_url = $($(me).parents('.share-origin')[0]).find('img')[0].src;
+                        pic_anchor = $($(me).parents('.share-origin')[0]).find('img')[0].id;
                     }catch(e){
                         pic_url = $($(me).parents('.preview-pre-content-box').find('img')[0])[0].src;
+                        pic_anchor = $($(me).parents('.preview-day-info')[0]).attr('id');
                     }
-                    data['link'] = data['link'] + '#' + pic_url;
+                    data['link'] = data['link'] + '#' + pic_anchor;
                     data['pic_url'] = pic_url;
                     data['type_key'] =  type_url_map[$('.user-tab-item-sel span').text() + '_save'] + '_pic';
                 }
