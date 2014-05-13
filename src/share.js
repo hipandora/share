@@ -119,6 +119,10 @@
             pic_anchor = pre_url + '#' + this.children('img').attr('id');
             is_share_article = false ;
         }
+        if(this.parent().parent().hasClass('preview-day-info')){
+            pic_anchor = pre_url + '#' + this.parent().parent().attr('id');
+            is_share_article = false ;
+        }
         var share_sentence = '';
         if(options['type'] === 'note') {
             share_sentence = '从计划到出行，给你最真实的经历与经验分享，'
