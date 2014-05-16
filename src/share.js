@@ -434,6 +434,18 @@
                     var day_cost_list = $item.find('.day-cost-list>ul>li');
 
                     var template = '<div style="width: 640px; margin-left: auto; margin-right: auto;">' +
+                        '<table>' +
+                            '<tr>' +
+                                '<td background='http://ww4.sinaimg.cn/large/82577871tw1egbhujif72j20d2016mwx.jpg' style="background-repeat: no-repeat; 0 0">' +
+                                    '<div style="width: 630px; height: 42px; line-height: 44px; padding-left: 10px; box-shadow: 0px 0px 5px gray;border-radius: 2px;">' +
+                                        '<span style="font-size: 20px; font-weight: bold; margin-right: 20px;">D1 </span>' +
+                                        '<span style="font-size: 20px; font-weight: bold; margin-right: 20px;">2014-05-08</span>' +
+                                        '<span style="font-size: 20px; font-weight: bold; margin-right: 20px;">星期四</span>' +
+                                        '</div>' +
+                                '</td>' +
+                            '</tr>' +
+                        '</table>' +
+
                         '<div style="width: 630px; height: 42px; line-height: 44px; padding-left: 10px; background: url(http://ww4.sinaimg.cn/large/82577871tw1egbhujif72j20d2016mwx.jpg) no-repeat 0 0; box-shadow: 0px 0px 5px gray;border-radius: 2px;">' +
                         '<span style="font-size: 20px; font-weight: bold; margin-right: 20px;">' + day_index+ ' </span>' +
                         '<span style="font-size: 20px; font-weight: bold; margin-right: 20px;">'+day+'</span>' +
