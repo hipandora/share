@@ -44,7 +44,6 @@
 
         $(document.body).on('click', '.sticky-popup', function (e) {
             e.stopPropagation();
-            e.preventDefault();
         });
     }
 
