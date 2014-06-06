@@ -11,7 +11,7 @@
   var SHARE_URL = {
     'note': '/index/viewNote',
     'xiu': '/index/viewXiu',
-    'food': '/index/cityFood'
+    'food': '/index/viewFood'
   };
 
   var share_initialize = false;
@@ -57,7 +57,7 @@
     if(!id){
       id = $share_origin.parent().parent().attr('id');
     }
-    if(location.pathname=='/person/myFood'){
+    if(location.pathname=='/person/myFood' || location.pathname == '/index/viewFood'){
       id = $share_origin.children().first().attr('id');
     }
     function pop_share_link_input() {
@@ -83,7 +83,7 @@
           top: '31px',
           right: '10px'
         });
-      }else if(location.pathname=='/person/myFood'){
+      }else if(location.pathname=='/person/myFood' || location.pathname == '/index/viewFood'){
         $share_link_elem.css({
           left: '40px'
         });
@@ -180,6 +180,11 @@
     }
     var option = $.extend({share_with_status: true, left: 0, right: 0, top: 0, bottom: 0, hide_like_item: false}, options);
     this.addClass('share-origin');
+    $like = ''
+    if(option.with_like) {
+      $like = '<div class="group-item-line"></div>' +
+        '<div class="group-item-like group-last-item"></div>';
+    }
     var only_share_content = '<div class="share-group share-container share-pic-container">' +
         '<div class="group-item-sina">' +
         '<div style="position:absolute;top:0px;left:2px;opacity:0;filter:alpha(opacity=0);">' +
@@ -188,7 +193,8 @@
         '</div>' +
         '<div class="group-item-weixin"></div>' +
         '<div class="sticky-popup group-item-email share-email-right"></div>' +
-        '<div class="sticky-popup group-item-link group-last-item"></div>' +
+        '<div class="sticky-popup group-item-link"></div>' +
+        $like +
         '</div>';
     var share_with_status = '<div class="share-items-group share-container share-article-container">' +
         '<div class="group-item-sina group-item-has-num">' +
@@ -218,6 +224,10 @@
     } else {
       $(only_share_content).appendTo(this);
 
+      if (options.with_like) {
+        $(only_share_content).find('.share-group').height(166);
+        init_like( $(this).find('.group-item-like') );
+      }
       function show_pic_container($elem) {
         $elem.find('.share-pic-container')
             .css({
@@ -251,7 +261,7 @@
         });
       }else if(option['type'] == 'food'){
         show_pic_container( $(this) );
-        if(location.pathname == '/person/myFood'){
+        if(location.pathname == '/person/myFood' || location.pathname == '/indx/viewFood'){
           $(this).children().last().css('position','fixed').css('top',$(window).height() / 3).css('left', $('.white-bg').offset().left - 40)
         }
       }
@@ -341,7 +351,7 @@
 
     //share my food
     var share_my_food = false;
-    if(location.pathname == '/person/myFood'){
+    if(location.pathname == '/person/myFood' || location.pathname == '/index/viewFood'){
       share_my_food = true;
     }
 
@@ -419,7 +429,7 @@
         var type_url_map = {
           '旅行手记': '/index/viewNote',
           '装备秀': '/index/viewXiu',
-          '目的地美食': 'index/cityFood',
+          '目的地美食': '/index/viewFood',
 
 
           '旅行手记_save': 'note',
