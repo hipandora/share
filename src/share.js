@@ -261,7 +261,7 @@
         });
       }else if(option['type'] == 'food'){
         show_pic_container( $(this) );
-        if(location.pathname == '/person/myFood' || location.pathname == '/indx/viewFood'){
+        if(location.pathname == '/person/myFood' || location.pathname == '/index/viewFood'){
           $(this).children().last().css('position','fixed').css('top',$(window).height() / 3).css('left', $('.white-bg').offset().left - 40)
         }
       }
