@@ -152,7 +152,7 @@
       title += '我发现了一篇很实用的' + partial_title + '并分享给大家！' + pre_url + (is_share_article ? '' : '#the_user_item') + '（分享自@hi潘多拉网 ） 查看戳这里: ';
     }
     if(options['type'] == 'food'){
-      title = '我发现了一道很棒的' + '#目的地美食#:' + $('#food-name').val().trim() +',并分享给大家！' + pre_url + '（分享自@hi潘多拉网 ） 查看戳这里: ';
+      title = '我发现了一道很棒的' + '#目的地美食#:' + $('#food-name').text().trim() +',并分享给大家！' + pre_url + '（分享自@hi潘多拉网 ） 查看戳这里: ';
     }
     var param = {
       url: pic_anchor,
