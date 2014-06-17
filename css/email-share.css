@@ -1,0 +1,134 @@
+.email-share-wrapper,
+.email-first-share-wrapper {
+  width: 320px;
+  height: 232px;
+  text-align: left;
+  padding: 18px 25px 23px 15px;
+  border: 1px solid #d2d2d2;
+  position: relative; }
+  .email-share-wrapper .email-share-right-arrow,
+  .email-share-wrapper .email-share-top-arrow,
+  .email-share-wrapper .email-share-left-arrow,
+  .email-first-share-wrapper .email-share-right-arrow,
+  .email-first-share-wrapper .email-share-top-arrow,
+  .email-first-share-wrapper .email-share-left-arrow {
+    display: block;
+    width: 8px;
+    height: 14px;
+    background: url(/img/icon-white-right-arrow-8x14.png) no-repeat 0 0;
+    position: absolute;
+    top: 124px;
+    right: -8px; }
+  .email-share-wrapper .email-share-left-arrow,
+  .email-first-share-wrapper .email-share-left-arrow {
+    background: url(/img/icon-white-left-arrow-8x14.png) no-repeat 0 0;
+    left: -8px; }
+  .email-share-wrapper .email-share-top-arrow,
+  .email-first-share-wrapper .email-share-top-arrow {
+    background: url(/img/icon-white-top-arrow-8x14.png) no-repeat 0 0;
+    top: -5px;
+    right: 117px; }
+  .email-share-wrapper .email-share-close,
+  .email-first-share-wrapper .email-share-close {
+    display: block;
+    width: 12px;
+    height: 12px;
+    line-height: 12px;
+    text-align: center;
+    color: #969696;
+    font-size: 22px;
+    cursor: pointer;
+    position: absolute;
+    top: 8px;
+    right: 10px; }
+
+.email-share-header {
+  color: #000000;
+  font-size: 14px; }
+
+.email-input-box {
+  width: 320px;
+  margin-top: 15px; }
+
+.email-address-self,
+.email-address-friend,
+.email-share-info {
+  width: 308px;
+  height: 18px;
+  line-height: 22px;
+  padding: 2px 5px;
+  margin-bottom: 10px;
+  font-size: 12px;
+  border: 1px solid #d2d2d2; }
+  .email-address-self:focus,
+  .email-address-friend:focus,
+  .email-share-info:focus {
+    outline: none;
+    border-color: #008ddf;
+    background-color: #ffffff; }
+
+.email-share-info {
+  height: 84px;
+  line-height: 20px;
+  margin-bottom: 6px; }
+
+.email-btn-group,
+.email-succeed-btn-group {
+  width: 320px;
+  margin-left: 228px; }
+
+.email-share-succeed-header {
+  color: #000000;
+  font-size: 14px;
+  padding-left: 20px;
+  margin-bottom: 10px;
+  background: url(/img/icon-checkmark-14x14.png) no-repeat 0 2px; }
+
+.email-recommend-tips span {
+  display: block;
+  font-size: 14px;
+  margin-bottom: 4px; }
+
+.email-checkbox-box {
+  margin-top: 46px; }
+
+.email-source {
+  font-size: 18px;
+  margin-right: 50px;
+  display: inline-block; }
+  .email-source .email-checkbox {
+    margin-bottom: 4px; }
+  .email-source .email-checkbox-text {
+    position: relative;
+    top: 2px;
+    left: 9px; }
+  .email-source input {
+    width: 14px;
+    height: 14px;
+    cursor: pointer; }
+
+.email-num {
+  color: #969696;
+  font-size: 12px;
+  margin-left: 23px; }
+
+.email-succeed-btn-group {
+  margin-top: 48px;
+  margin-left: 186px; }
+  .email-succeed-btn-group .email-deny {
+    display: inline-block;
+    color: #969696;
+    font-size: 12px;
+    cursor: pointer;
+    margin-right: 8px; }
+    .email-succeed-btn-group .email-deny:hover {
+      text-decoration: underline; }
+  .email-succeed-btn-group .btn-white-large, .email-succeed-btn-group .btn-blue-large {
+    display: inline-block; }
+
+.email-first-share-wrapper {
+  padding: 18px 25px 20px 15px;
+  height: 16px; }
+  .email-first-share-wrapper .email-share-right-arrow,
+  .email-first-share-wrapper .email-share-left-arrow {
+    top: 20px; }
