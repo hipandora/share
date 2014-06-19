@@ -254,7 +254,7 @@
                 '<div class="sticky-popup group-item-link"></div>' +
                 '</div>';
             var $share_pic = $(share_pic);
-            $share_pic.appendTo($(position_options['base_position'])).css(position_options['css']);
+            $share_pic.insertAfter($(position_options['ele_insert_after'])).css(position_options['css']);
             $('body').append(share_pic);
             $(position_options['mouse_listen_base_position']).mouseenter(function(){
                 $(this).find('.share-pic-container').show();
