@@ -64,7 +64,7 @@
 
     // }
 
-    $.fn.share_article = function(position_options, weibo_options, wexin_options, email_options, link_options) {
+    $.fn.share_article = function(options) {
 
         function render_template_and_weibo(position_options, weibo_options) {
             var temp = [];
@@ -283,12 +283,12 @@
 
 
 
-        render_template_and_weibo(position_options, weibo_options);
-        share_email(email_options);
+        render_template_and_weibo(options['position'], options['weibo']);
+        share_email(options['email']);
     }
 
 
-    $.fn.share_pic = function(position_options, weibo_options, wexin_options, email_options, link_options) {
+    $.fn.share_pic = function(options) {
 
 
         function render_temlate(position_options) {
@@ -321,13 +321,13 @@
             $share_pic.appendTo($(position_options['base_position'])).css(position_options['css']);
             $('body').append(share_pic);
             $(position_options['mouse_listen_base_position']).mouseenter(function(){
-                $(position_options['base_position'] + ' .share-pic-container').show();
+                $(this).find('.share-pic-container').show();
             }).mouseleave(function(event){
-                $(position_options['base_position'] + ' .share-pic-container').hide();
+                 $(this).find('.share-pic-container').hide();
             });
         }
 
-        render_temlate(position_options);
+        render_temlate(options['position']);
 
     }
 
