@@ -7,63 +7,6 @@
  */
 
 (function($) {
-
-    // $.fn.share_for_node = function(position_options, weibo_options, wexin_options, email_options, link_options) {
-
-
-    //     function render_temlate(position_options) {
-    //         $like = ''
-    //         if (position_options.with_like) {
-    //             $like = '<div class="group-item-line"></div>' +
-    //                 '<div class="group-item-like group-last-item"></div>';
-    //         }
-    //         var param = {
-    //             url: 'http://0.0.0.0:8080/images/uploads/user/2014-05-11/536ef385dbe9b.jpg.535.jpg',
-    //             type: '1',
-    //             count: '',
-    //             appkey: '1153655536',
-    //             title: 'abc',
-    //             pic: 'http://0.0.0.0:8080/images/uploads/user/2014-05-11/536ef385dbe9b.jpg.535.jpg',
-    //             ralateUid: '',
-    //             language: 'zh_cn',
-    //             rnd: new Date().valueOf()
-    //         }
-    //         var temp = [];
-    //         for (var p in param) {
-    //             temp.push(p + '=' + encodeURIComponent(param[p] || ''))
-    //         }
-    //         var share_pic = '<div class="share-group share-container share-pic-container" >' +
-    //             '<div class="group-item-sina">' +
-    //             '<div style="position:absolute;top:0px;left:2px;opacity:0;filter:alpha(opacity=0);">' +
-    //             '<iframe allowTransparency="true" frameborder="0" scrolling="no" src="http://hits.sinajs.cn/A1/weiboshare.html?' + temp.join('&') + '" width="' + 32 + '" height="' + 32 + '"></iframe>' +
-    //             '</div>' +
-    //             '</div>' +
-    //             '<div class="group-item-weixin"></div>' +
-    //             '<div class="sticky-popup group-item-email share-email-right"></div>' +
-    //             '<div class="sticky-popup group-item-link"></div>' +
-    //             $like +
-    //             '</div>';
-    //         var share_article = '<div class="share-items-group share-container share-article-container" style="position:fixed;left:100px;top:100px;display:block">' +
-    //             '<div class="group-item-sina group-item-has-num">' +
-    //             '<div style="position:absolute;top:2px;left:4px;opacity:0;filter:alpha(opacity=0);z-index: 9999">' +
-    //             '<iframe allowTransparency="true" frameborder="0" scrolling="no" src="http://hits.sinajs.cn/A1/weiboshare.html?' + temp.join('&') + '" width="' + 32 + '" height="' + 32 + '"></iframe>' +
-    //             '</div>' +
-    //             '<span class="group-item-num sina-share-count" style="position: relative; left:-2px;top:-6px;text-align:center;color: #828282">0</span>' +
-    //             '</div>' +
-    //             '<div class="group-item-weixin group-item-has-num" style="">' +
-    //             '<span class="group-item-num weixin-share-count" style="position: relative; left:-2px;top:-6px;text-align:center;color: #828282">0</span>' +
-    //             '</div>' +
-    //             '<div class="sticky-popup group-item-email-gray share-email-left"></div>' +
-    //             '<div class="group-item-line"></div>' +
-    //             '<div class="group-item-like"></div>' +
-    //             '</div>';
-    //         $('body').append(share_article);
-    //     }
-
-    //     render_temlate(position_options);
-
-    // }
-
     $.fn.share_article = function(options) {
 
         function render_template_and_weibo(position_options, weibo_options) {
@@ -242,9 +185,6 @@
                     $(this).parent().remove();
                 });
             }
-
-
-
         }
 
         var ShareUtil = (function() {
@@ -281,16 +221,12 @@
             }
         }).call(this);
 
-
-
         render_template_and_weibo(options['position'], options['weibo']);
         share_email(options['email']);
     }
 
 
     $.fn.share_pic = function(options) {
-
-
         function render_temlate(position_options) {
             var param = {
                 url: 'http://0.0.0.0:8080/images/uploads/user/2014-05-11/536ef385dbe9b.jpg.535.jpg',
