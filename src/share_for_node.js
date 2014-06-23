@@ -227,6 +227,7 @@
 
 
     $.fn.share_pic = function(options) {
+        var me = this;
         function render_temlate(position_options) {
             var param = {
                 url: 'http://0.0.0.0:8080/images/uploads/user/2014-05-11/536ef385dbe9b.jpg.535.jpg',
@@ -254,13 +255,13 @@
                 '<div class="sticky-popup group-item-link"></div>' +
                 '</div>';
             var $share_pic = $(share_pic);
-            $share_pic.insertAfter($(position_options['ele_insert_after'])).css(position_options['css']);
-            $('body').append(share_pic);
-            $(position_options['mouse_listen_base_position']).mouseenter(function(){
-                $(this).find('.share-pic-container').show();
-            }).mouseleave(function(event){
-                 $(this).find('.share-pic-container').hide();
-            });
+
+            $share_pic.appendTo(me).css(position_options['css']);
+            // $(position_options['mouse_listen_base_position']).mouseenter(function(){
+            //     $(this).find('.share-pic-container').show();
+            // }).mouseleave(function(event){
+            //      $(this).find('.share-pic-container').hide();
+            // });
         }
 
         render_temlate(options['position']);

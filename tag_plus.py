@@ -22,14 +22,16 @@ def read_file(file_name):
 	file.writelines(lines)
 	file.close
 
+	return version3
+
 if(__name__=="__main__"):
 	files = ['bower.json', 'package.json', 'share.jquery.json']
 	print 'version plusing ...\n'
 	for file_name in files:
 		print '    working on: ' + file_name + ' ...'
-		read_file(file_name)
+		current_version = read_file(file_name)
 		print '    success\n'	
-	print 'ok, all file changes.\n'
+	print 'Ok, all file has changed. Current Version is %s.\n' % (current_version)
 
 
 
