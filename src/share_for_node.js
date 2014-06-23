@@ -41,7 +41,7 @@
             // first step
 
             var share_email_pop_wrapper =
-                '<div class="sticky-popup email-share-wrapper">' +
+                '<div class="sticky-popup email-share-wrapper email-share-wrapper-left">' +
                 '<b class="email-share-left-arrow"></b>' +
                 '<a class="email-share-close " href="javascript:{}" >×</a>' +
                 '<div class="email-share-header">给你的朋友发送邮件</div>' +
@@ -56,29 +56,29 @@
                 '<a class="btn-white-large">发送</a>' +
                 '</div>' +
                 '</div>';
-            var $share_email_pop_wrapper = $(share_email_pop_wrapper);
-            $share_email_pop_wrapper.css(email_options['css']);
-
 
             $('.share-email-left').click(function(event) {
-                if ($(".email-share-wrapper").length == 0) {
+                if ($(".email-share-wrapper-left").length == 0) {
+                    $('.email-share-wrapper').remove();
+                    var $share_email_pop_wrapper = $(share_email_pop_wrapper);
+                    $share_email_pop_wrapper.css(email_options['css']);
                     $share_email_pop_wrapper.appendTo($('.share-article-container'));
+                    $('.email-validate').val('')
                     $('.email-btn-group a').click(function() {
                         if (!(ShareUtil.is_email($('.email-validate:first').val().trim()) &&
                             ShareUtil.is_email($('.email-validate:last').val().trim()) &&
                             $('.email-share-info').val().trim().length != 0)) {
                             return;
                         }
-                        // $.post('/index/share-content-via-email', {
-                        //     data: email_options['data']
-                        // }).done(function(data) {
-                        //     pop_subscribe_after_share_over_email_block($.trim($('.email-address-self').val()));
-                        //     $($(me).parent().parent().remove());
-                        // }).fail(function(data) {
-                        //     alert('邮件发送过程中出现问题，我们正在解决！');
-                        // });
-                        pop_subscribe_after_share_over_email_block($.trim($('.email-address-self').val()));
-                        $($(this).parent().parent().remove());
+                        $.post('/index/share-content-via-email', {
+                            data: email_options['data']
+                        }).done(function(data) {
+                            var self_email = $.trim($('.email-address-self').val());
+                            $('.share-email-left').siblings('.email-share-wrapper').remove()
+                            pop_subscribe_after_share_over_email_block(self_email);
+                        }).fail(function(data) {
+                            alert('邮件发送过程中出现问题，我们正在解决！');
+                        });
                     });
                     $('.email-share-close').click(function() {
                         $(this).parent().remove();
@@ -145,28 +145,27 @@
                     $(this).parent().parent().remove();
                 });
                 $('.continue-receive-subscribe').click(function() {
-                    // var data = {}, me = this,
-                    //     upload_status = true;
-                    // data['email'] = email;
-                    // $('.email-checkbox-box :checked').each(function(index, item) {
-                    //     data['type'] = $(item).attr('subscribe_type');
-                    //     $.post('/subscribe', data).done(function() {
-                    //         upload_status = upload_status && true;
-                    //     }).fail(function(data) {
-                    //         upload_status = upload_status && false;
-                    //         console.error(data['responseJSON']['error']['code']);
-                    //     });
+                    var data = {}, me = this,
+                        upload_status = true;
+                    data['email'] = self_email;
+                    $('.email-checkbox-box :checked').each(function(index, item) {
+                        data['type'] = $(item).attr('subscribe_type');
+                        $.post('/subscribe', data).done(function() {
+                            upload_status = upload_status && true;
+                        }).fail(function(data) {
+                            upload_status = upload_status && false;
+                            console.error(data['responseJSON']['error']['code']);
+                        });
 
-                    // }).promise().done(function() {
-                    //     if (upload_status) {
-                    //         $(me).parent().parent().remove();
-                    //         pop_continue_receive_subscribe_success_block(side, opt);
-                    //     } else {
-                    //         alert('上传信息失败，请重试');
-                    //     }
-                    // });
-                    $(this).parent().parent().remove();
-                    pop_continue_receive_subscribe_success_block();
+                    }).promise().done(function() {
+                        if (upload_status) {
+                            $(me).parent().parent().remove();
+                            pop_continue_receive_subscribe_success_block();
+                        } else {
+                            alert('上传信息失败，请重试');
+                        }
+                    });
+
 
                 });
             }
@@ -242,13 +241,15 @@
                 '<a class="btn-white-large">发送</a>' +
                 '</div>' +
                 '</div>';
-            var $share_email_pop_wrapper = $(share_email_pop_wrapper);
-            $share_email_pop_wrapper.css(email_options['css']);
+
 
             var share_pic_node_class = '.' + me.attr('class') + ' ';
 
             $(share_pic_node_class + ' .share-email-right').click(function(event) {
                 if ($(".email-share-wrapper-right").length == 0) {
+                    $('.email-share-wrapper').remove();
+                    var $share_email_pop_wrapper = $(share_email_pop_wrapper);
+                    $share_email_pop_wrapper.css(email_options['css']);
                     $share_email_pop_wrapper.appendTo($(share_pic_node_class + ' .share-pic-container-right'));
                     $('.email-share-wrapper-right .email-btn-group a').click(function() {
                         if (!(ShareUtil.is_email($('.email-validate:first').val().trim()) &&
@@ -256,16 +257,15 @@
                             $('.email-share-info').val().trim().length != 0)) {
                             return;
                         }
-                        // $.post('/index/share-content-via-email', {
-                        //     data: email_options['data']
-                        // }).done(function(data) {
-                        //     pop_subscribe_after_share_over_email_block($.trim($('.email-address-self').val()));
-                        //     $($(me).parent().parent().remove());
-                        // }).fail(function(data) {
-                        //     alert('邮件发送过程中出现问题，我们正在解决！');
-                        // });
-                        pop_subscribe_after_share_over_email_block($.trim($('.email-address-self').val()));
-                        $($(this).parent().parent().remove());
+                        $.post('/index/share-content-via-email', {
+                            data: email_options['data']
+                        }).done(function(data) {
+                            var self_email = $.trim($('.email-address-self').val());
+                            $(share_pic_node_class + ' .share-email-right').siblings('.email-share-wrapper').remove()
+                            pop_subscribe_after_share_over_email_block(self_email);
+                        }).fail(function(data) {
+                            alert('邮件发送过程中出现问题，我们正在解决！');
+                        });
                     });
                     $('.email-share-close').click(function() {
                         $(this).parent().remove();
@@ -333,29 +333,26 @@
                     $(this).parent().parent().remove();
                 });
                 $('.continue-receive-subscribe').click(function() {
-                    // var data = {}, me = this,
-                    //     upload_status = true;
-                    // data['email'] = email;
-                    // $('.email-checkbox-box :checked').each(function(index, item) {
-                    //     data['type'] = $(item).attr('subscribe_type');
-                    //     $.post('/subscribe', data).done(function() {
-                    //         upload_status = upload_status && true;
-                    //     }).fail(function(data) {
-                    //         upload_status = upload_status && false;
-                    //         console.error(data['responseJSON']['error']['code']);
-                    //     });
+                    var data = {}, me = this,
+                        upload_status = true;
+                    data['email'] = self_email;
+                    $('.email-checkbox-box :checked').each(function(index, item) {
+                        data['type'] = $(item).attr('subscribe_type');
+                        $.post('/subscribe', data).done(function() {
+                            upload_status = upload_status && true;
+                        }).fail(function(data) {
+                            upload_status = upload_status && false;
+                            console.error(data['responseJSON']['error']['code']);
+                        });
 
-                    // }).promise().done(function() {
-                    //     if (upload_status) {
-                    //         $(me).parent().parent().remove();
-                    //         pop_continue_receive_subscribe_success_block(side, opt);
-                    //     } else {
-                    //         alert('上传信息失败，请重试');
-                    //     }
-                    // });
-                    $(this).parent().parent().remove();
-                    pop_continue_receive_subscribe_success_block();
-
+                    }).promise().done(function() {
+                        if (upload_status) {
+                            $(me).parent().parent().remove();
+                            pop_continue_receive_subscribe_success_block();
+                        } else {
+                            alert('上传信息失败，请重试');
+                        }
+                    });
                 });
             }
 
