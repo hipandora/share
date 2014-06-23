@@ -29,8 +29,12 @@
                 '<div class="group-item-like"></div>' +
                 '</div>';
             var $share_article = $(share_article);
-            $share_article.css(position_options['css'])
+            $share_article.css(position_options['css']);
             $share_article.appendTo($('body'));
+            if(position_options['like'] != 'show'){
+              $('.group-item-line,.group-item-like').hide()
+                .parent().css('height', '140px');
+            }
         }
 
         function share_email(email_options) {
@@ -178,7 +182,6 @@
 
             function pop_continue_receive_subscribe_success_block() {
                 $continue_receive_subscribe_success = $(continue_receive_subscribe_success);
-                console.log(parseInt(email_options['css']['top']) + 105)
                 $continue_receive_subscribe_success.css(email_options['css']).css('top', (parseInt(email_options['css']['top']) + 105) + 'px');
                 $continue_receive_subscribe_success.appendTo($('.share-article-container'));
                 $('.email-share-close').click(function() {
