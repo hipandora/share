@@ -387,8 +387,28 @@
             }
         }
 
+        function share_link(link_options) {
+            var $share_origin = $('.' + me.attr('class') + ' .share-pic-container-right');
+            $('.' + me.attr('class') + ' .group-item-link').click(function(event) {
+                var share_link_elem =
+                    '<div class="sticky-popup copy-link">' +
+                    '<input class="copy-link-input" type="text" value="' + link_options['src'] + '">' +
+                    '</div>';
+                var $share_link_elem = $(share_link_elem);
+                $share_origin.append($share_link_elem);
+                var $input = $share_link_elem.find('input');
+                $input.select();
+                $input.on('copy', function() {
+                    setTimeout(function() {
+                        $share_link_elem.remove();
+                    }, 0);
+                });
+            });
+        }
+
         render_temlate(options['position']);
         share_email(options['email']);
+        share_link(options['link']);
     }
 
 
