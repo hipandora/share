@@ -31,9 +31,9 @@
             var $share_article = $(share_article);
             $share_article.css(position_options['css']);
             $share_article.appendTo($('body'));
-            if(position_options['like'] != 'show'){
-              $('.group-item-line,.group-item-like').hide()
-                .parent().css('height', '140px');
+            if (position_options['like'] != 'show') {
+                $('.group-item-line,.group-item-like').hide()
+                    .parent().css('height', '140px');
             }
         }
 
@@ -198,21 +198,10 @@
     $.fn.share_pic = function(options) {
         var me = this;
 
-        function render_temlate(position_options) {
-            var param = {
-                url: 'http://0.0.0.0:8080/images/uploads/user/2014-05-11/536ef385dbe9b.jpg.535.jpg',
-                type: '1',
-                count: '',
-                appkey: '1153655536',
-                title: 'abc',
-                pic: 'http://0.0.0.0:8080/images/uploads/user/2014-05-11/536ef385dbe9b.jpg.535.jpg',
-                ralateUid: '',
-                language: 'zh_cn',
-                rnd: new Date().valueOf()
-            }
+        function render_temlate(position_options, weibo_options) {
             var temp = [];
-            for (var p in param) {
-                temp.push(p + '=' + encodeURIComponent(param[p] || ''))
+            for (var p in weibo_options['param']) {
+                temp.push(p + '=' + encodeURIComponent(weibo_options['param'][p] || ''))
             }
             var share_pic = '<div class="share-group share-container share-pic-container share-pic-container-right" >' +
                 '<div class="group-item-sina">' +
@@ -409,7 +398,7 @@
             });
         }
 
-        render_temlate(options['position']);
+        render_temlate(options['position'], options['weibo']);
         share_email(options['email']);
         share_link(options['link']);
     }
