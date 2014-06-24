@@ -215,11 +215,11 @@
             var $share_pic = $(share_pic);
 
             $share_pic.appendTo(me).css(position_options['css']);
-            // $(position_options['mouse_listen_base_position']).mouseenter(function(){
-            //     $(this).find('.share-pic-container').show();
-            // }).mouseleave(function(event){
-            //      $(this).find('.share-pic-container').hide();
-            // });
+            $(position_options['mouse_listen_base_position']).mouseenter(function() {
+                $(this).find('.share-pic-container').show();
+            }).mouseleave(function(event) {
+                $(this).find('.share-pic-container').hide();
+            });
         }
 
         function share_email(email_options) {
