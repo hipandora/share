@@ -31,9 +31,18 @@
             var $share_article = $(share_article);
             $share_article.css(position_options['css']);
             $share_article.appendTo($('body'));
-            if (position_options['like'] != 'show') {
+            if (!position_options['like']['like_show']) {
                 $('.group-item-line,.group-item-like').hide()
                     .parent().css('height', '140px');
+            } else {
+                var $like = $(".group-item-like");
+                if (position_options['like']['is_liked']) {
+                    $like.addClass('group-item-liked');
+                }
+                $like.click(function(event) {
+                    position_options['like']['like_clikc_callback']();
+                });
+
             }
         }
 
