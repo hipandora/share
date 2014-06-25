@@ -198,8 +198,55 @@
             }
         }
 
+        function render_sina_share_counts(share_count_option) {
+            if (share_count_option['urls'].length == 0) {
+                return [];
+            }
+
+            var url_longs = '';
+            $.each(share_count_option['urls'], function(index, item) {
+                url_longs += '&url_long=' + encodeURIComponent(item);
+            })
+            url_longs = url_longs.substr(1, url_longs.length - 1)
+            $.ajax({
+                url: 'https://api.weibo.com/2/short_url/shorten.json?' + url_longs + '&access_token=2.00JT793DVzTAUE1549e8542b3w2R8E',
+                type: "GET",
+                dataType: "jsonp",
+                success: function(short_url_result, textStatus, xhr) {
+                    if (!short_url_result['data']['urls']) {
+                        return;
+                    }
+                    var url_shorts = '';
+                    $.each(short_url_result['data']['urls'], function(index, item) {
+                        url_shorts += "&url_short=" + encodeURIComponent(item['url_short']);
+                    })
+                    url_shorts = url_shorts.substr(1, url_shorts.length - 1);
+                    $.ajax({
+                        url: 'https://api.weibo.com/2/short_url/share/counts.json?' + url_shorts + '&access_token=2.00JT793DVzTAUE1549e8542b3w2R8E',
+                        type: "GET",
+                        dataType: "jsonp",
+                        success: function(share_count_result, textStatus, xhr) {
+                            if (share_count_result['data']['urls']) {
+                                share_count_option['count_callback'](share_count_result['data']['urls']);
+                            }
+                        },
+                        error: function(error) {
+                            console.error('获取分享数错误');
+                        }
+                    });
+                },
+                error: function(error) {
+                    console.error('获取短网址错误');
+                }
+            })
+        }
+
         render_template_and_weibo(options['position'], options['weibo']);
         share_email(options['email']);
+        if (options['weibo']['share_count']) {
+            render_sina_share_counts(options['weibo']['share_count']);
+        }
+
     }
 
 
