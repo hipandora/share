@@ -79,6 +79,9 @@
                             $('.email-share-info').val().trim().length != 0)) {
                             return;
                         }
+                        email_options['data']['from'] = $('.email-address-self').val();
+                        email_options['data']['tos'] = $('.email-address-friend').val().split(',');
+                        email_options['data']['input_share_content'] = $('.email-share-info').val();
                         $.post('/index/share-content-via-email', {
                             data: email_options['data']
                         }).done(function(data) {
@@ -313,6 +316,9 @@
                             $('.email-share-info').val().trim().length != 0)) {
                             return;
                         }
+                        email_options['data']['from'] = $('.email-address-self').val();
+                        email_options['data']['tos'] = $('.email-address-friend').val().split(',');
+                        email_options['data']['input_share_content'] = $('.email-share-info').val();
                         $.post('/index/share-content-via-email', {
                             data: email_options['data']
                         }).done(function(data) {
