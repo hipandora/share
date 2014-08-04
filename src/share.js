@@ -11,7 +11,8 @@
   var SHARE_URL = {
     'note': '/index/viewNote',
     'xiu': '/index/viewXiu',
-    'food': '/index/viewFood'
+    'food': '/index/viewFood',
+    'photo': '/index/viewAlbum'
   };
 
   var share_initialize = false;
