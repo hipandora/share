@@ -15,16 +15,16 @@
                 temp.push(p + '=' + encodeURIComponent(weibo_options['param'][p] || ''))
             }
             var share_article = '<div class="share-items-group share-container share-article-container" >' +
-                '<div class="group-item-sina group-item-has-num">' +
+                '<div class="group-item-sina share-group-item group-item-has-num">' +
                 '<div style="position:absolute;top:2px;left:4px;opacity:0;filter:alpha(opacity=0);z-index: 9999">' +
                 '<iframe allowTransparency="true" frameborder="0" scrolling="no" src="http://hits.sinajs.cn/A1/weiboshare.html?' + temp.join('&') + '" width="' + 32 + '" height="' + 32 + '"></iframe>' +
                 '</div>' +
-                '<span class="group-item-num sina-share-count" style="position: relative; left:-2px;top:-6px;text-align:center;color: #828282">0</span>' +
+                '<span class="group-item-num share-group-item sina-share-count" style="position: relative; left:-2px;top:-6px;text-align:center;color: #828282">0</span>' +
                 '</div>' +
-                '<div class="group-item-weixin group-item-has-num" style="">' +
+                '<div class="group-item-weixin share-group-item group-item-has-num" style="">' +
                 '<span class="group-item-num weixin-share-count" style="position: relative; left:-2px;top:-6px;text-align:center;color: #828282">0</span>' +
                 '</div>' +
-                '<div class="sticky-popup group-item-email-gray share-email-left"></div>' +
+                '<div class="sticky-popup share-group-item group-item-email-gray share-email-left"></div>' +
                 '<div class="group-item-line"></div>' +
                 '<div class="group-item-like"></div>' +
                 '</div>';
@@ -32,8 +32,7 @@
             $share_article.css(position_options['css']);
             $share_article.appendTo($('body'));
             if (!position_options['like']['like_show']) {
-                $('.group-item-line,.group-item-like').hide()
-                    .parent().css('height', '140px');
+                $('.group-item-line,.group-item-like').hide();
             } else {
                 var $like = $(".group-item-like");
                 if (position_options['like']['is_liked']) {
@@ -42,7 +41,6 @@
                 $like.click(function(event) {
                     position_options['like']['like_clikc_callback']();
                 });
-
             }
         }
 
@@ -262,14 +260,14 @@
                 temp.push(p + '=' + encodeURIComponent(weibo_options['param'][p] || ''))
             }
             var share_pic = '<div class="share-group share-container share-pic-container share-pic-container-right" >' +
-                '<div class="group-item-sina">' +
+                '<div class="group-item-sina share-group-item">' +
                 '<div style="position:absolute;top:0px;left:2px;opacity:0;filter:alpha(opacity=0);">' +
                 '<iframe allowTransparency="true" frameborder="0" scrolling="no" src="http://hits.sinajs.cn/A1/weiboshare.html?' + temp.join('&') + '" width="' + 32 + '" height="' + 32 + '"></iframe>' +
                 '</div>' +
                 '</div>' +
-                '<div class="group-item-weixin"></div>' +
-                '<div class="sticky-popup group-item-email share-email-right"></div>' +
-                '<div class="sticky-popup group-item-link"></div>' +
+                '<div class="group-item-weixin share-group-item"></div>' +
+                '<div class="sticky-popup group-item-email share-group-item share-email-right"></div>' +
+                '<div class="sticky-popup group-item-link share-group-item"></div>' +
                 '</div>';
             var $share_pic = $(share_pic);
 

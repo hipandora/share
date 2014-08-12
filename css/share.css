@@ -97,6 +97,11 @@
     background: url(../img/icon-email-gray-24x19.png) no-repeat 0 0;
 }
 
+.share-group-item {
+    display: inline-block;
+    vertical-align: top;
+}
+
 .group-item-like {
     background: url(../img/icon-like-20x16.png) no-repeat 0 0;
 }
