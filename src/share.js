@@ -187,29 +187,29 @@
         '<div class="group-item-like group-last-item"></div>';
     }
     var only_share_content = '<div class="share-group share-container share-pic-container">' +
-        '<div class="group-item-sina">' +
+        '<div class="group-item-sina" title="分享到微博">' +
         '<div style="position:absolute;top:0px;left:2px;opacity:0;filter:alpha(opacity=0);">' +
         '<iframe allowTransparency="true" frameborder="0" scrolling="no" src="http://hits.sinajs.cn/A1/weiboshare.html?' + temp.join('&') + '" width="' + _w + '" height="' + _h + '"></iframe>' +
         '</div>' +
         '</div>' +
-        '<div class="group-item-weixin"></div>' +
-        '<div class="sticky-popup group-item-email share-email-right"></div>' +
-        '<div class="sticky-popup group-item-link"></div>' +
+        '<div class="group-item-weixin" title="分享到微信"></div>' +
+        '<div class="sticky-popup group-item-email share-email-right" title="分享到邮件"></div>' +
+        '<div class="sticky-popup group-item-link" title="复制链接"></div>' +
         $like +
         '</div>';
     var share_with_status = '<div class="share-items-group share-container share-article-container">' +
-        '<div class="group-item-sina group-item-has-num">' +
+        '<div class="group-item-sina group-item-has-num" title="分享到微博">' +
         '<div style="position:absolute;top:2px;left:4px;opacity:0;filter:alpha(opacity=0);z-index: 9999">' +
         '<iframe allowTransparency="true" frameborder="0" scrolling="no" src="http://hits.sinajs.cn/A1/weiboshare.html?' + temp.join('&') + '" width="' + _w + '" height="' + _h + '"></iframe>' +
         '</div>' +
         '<span class="group-item-num sina-share-count" style="position: relative; left:-2px;top:-6px;text-align:center;color: #828282">0</span>' +
         '</div>' +
-        '<div class="group-item-weixin group-item-has-num" style="">' +
+        '<div class="group-item-weixin group-item-has-num" style="" title="分享到微信">' +
         '<span class="group-item-num weixin-share-count" style="position: relative; left:-2px;top:-6px;text-align:center;color: #828282">0</span>' +
         '</div>' +
-        '<div class="sticky-popup group-item-email-gray share-email-left"></div>' +
-        '<div class="group-item-line"></div>' +
-        '<div class="group-item-like"></div>' +
+        '<div class="sticky-popup group-item-email-gray share-email-left" title="分享到邮件"></div>' +
+        '<div class="group-item-line" title="复制链接"></div>' +
+        '<div class="group-item-like" title="喜欢"></div>' +
         '</div>';
     if (option.share_with_status) {
       var $share_with_status = $(share_with_status);

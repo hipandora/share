@@ -15,18 +15,18 @@
         temp.push(p + '=' + encodeURIComponent(weibo_options['param'][p] || ''))
       }
       var share_article = '<div class="share-items-group share-container share-article-container" >' +
-        '<div class="group-item-sina share-group-item group-item-has-num">' +
+        '<div class="group-item-sina share-group-item group-item-has-num" title="分享到微博">' +
         '<div style="position:absolute;top:2px;left:4px;opacity:0;filter:alpha(opacity=0);z-index: 9999">' +
         '<iframe allowTransparency="true" frameborder="0" scrolling="no" src="http://hits.sinajs.cn/A1/weiboshare.html?' + temp.join('&') + '" width="' + 32 + '" height="' + 32 + '"></iframe>' +
         '</div>' +
         '<span class="group-item-num share-group-item sina-share-count" style="position: relative; left:-2px;top:-6px;text-align:center;color: #828282">0</span>' +
         '</div>' +
-        '<div class="group-item-weixin share-group-item group-item-has-num" style="">' +
+        '<div class="group-item-weixin share-group-item group-item-has-num" style="" title="分享到微信">' +
         '<span class="group-item-num weixin-share-count" style="position: relative; left:-2px;top:-6px;text-align:center;color: #828282">0</span>' +
         '</div>' +
-        '<div class="sticky-popup share-group-item group-item-email-gray share-email-left"></div>' +
-        '<div class="group-item-line"></div>' +
-        '<div class="group-item-like"></div>' +
+        '<div class="sticky-popup share-group-item group-item-email-gray share-email-left" title="分享到邮件"></div>' +
+        '<div class="group-item-line" title="复制链接"></div>' +
+        '<div class="group-item-like" title="喜欢"></div>' +
         '</div>';
       var $share_article = $(share_article);
       $share_article.css(position_options['css']);
@@ -261,14 +261,14 @@
         temp.push(p + '=' + encodeURIComponent(weibo_options['param'][p] || ''))
       }
       var share_pic = '<div class="share-group share-container share-pic-container share-pic-container-right" >' +
-        '<div class="group-item-sina share-group-item">' +
+        '<div class="group-item-sina share-group-item" title="分享到微博">' +
         '<div style="position:absolute;top:0px;left:2px;opacity:0;filter:alpha(opacity=0);">' +
         '<iframe allowTransparency="true" frameborder="0" scrolling="no" src="http://hits.sinajs.cn/A1/weiboshare.html?' + temp.join('&') + '" width="' + 32 + '" height="' + 32 + '"></iframe>' +
         '</div>' +
         '</div>' +
-        '<div class="group-item-weixin share-group-item"></div>' +
-        '<div class="sticky-popup group-item-email share-group-item share-email-right"></div>' +
-        '<div class="sticky-popup group-item-link share-group-item"></div>' +
+        '<div class="group-item-weixin share-group-item" title="分享到微信"></div>' +
+        '<div class="sticky-popup group-item-email share-group-item share-email-right" title="分享到邮件"></div>' +
+        '<div class="sticky-popup group-item-link share-group-item" title="复制链接"></div>' +
         '</div>';
       var $share_pic = $(share_pic);
 
