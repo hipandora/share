@@ -521,7 +521,7 @@
 
       if(share_food) {
         $('.email-share-wrapper').css('top', '36px').css('right', '160px');
-        $('.email-share-wrapper b:first').removeClass().addClass('email-share-top-arrow');
+        $('.email-share-wrapper b:first').removeClass().addClass('email-share-right-arrow');
       }
 
       if(share_my_food){
@@ -609,7 +609,7 @@
 
       if(share_food) {
         $('.email-share-wrapper').css('top', '36px').css('right', '160px');
-        $('.email-share-wrapper b:first').removeClass().addClass('email-share-top-arrow');
+        $('.email-share-wrapper b:first').removeClass().addClass('email-share-right-arrow');
       }
 
       if(share_my_food){
@@ -642,7 +642,7 @@
       });
       if(share_food) {
         $('.email-first-share-wrapper').css('top', '36px').css('right', '160px');
-        $('.email-first-share-wrapper b:first').removeClass().addClass('email-share-top-arrow');
+        $('.email-first-share-wrapper b:first').removeClass().addClass('email-share-right-arrow');
       }
 
       if(share_my_food){
